@@ -25,4 +25,22 @@
 **Features**
 
 
-  - Knowledge extraction task based on pre-tra
+  - Knowledge extraction task based on pre-training language model (compatible with pre-training models such as BERT and Roberta.)
+    - Named Entity Extraction
+    - Event Extraction
+    - Slot filling and intent detection
+    - <em> more tasks </em>
+  - Training and testing interface
+  - fast deployment of your extraction models
+
+## Environment
+
+  - python3.8
+  - requirements.txt
+
+
+## Architecture
+
+![框架](./imgs/overview1.png)
+
+It mainly incl
