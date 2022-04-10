@@ -43,4 +43,8 @@
 
 ![框架](./imgs/overview1.png)
 
-It mainly incl
+It mainly includes **three** modules, as `models`,`lit_models` and `data`.
+
+### models module
+
+It stores our three main models, the relationship recognition model for the single sentence, the named entity recognition model for the relationship in the known sentence, and the inference model that integrates the first two. It is mainly derived from the defined pre-trained models in t
