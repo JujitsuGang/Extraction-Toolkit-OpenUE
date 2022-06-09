@@ -51,4 +51,10 @@ It stores our three main models, the relationship recognition model for the sing
 
 ### lit_models module
 
-The code is mainly inherited from `pytorch_lightning.Trainer`. It can automatically build model training under different hardware such as single card, multi-card, GPU, TPU, etc. We define `training_step` and `validation_step` in it to automatically build training logic fo
+The code is mainly inherited from `pytorch_lightning.Trainer`. It can automatically build model training under different hardware such as single card, multi-card, GPU, TPU, etc. We define `training_step` and `validation_step` in it to automatically build training logic for training. 
+
+Because its hardware is not sensitive, we can call the OpenUE training module in a variety of different environments.
+
+### data module
+
+The code for different operations on different data sets is stored in `data`. The `tokenizer` in the `transformers` library is used to segment the data and then turn the data into the features w
