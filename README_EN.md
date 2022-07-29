@@ -57,4 +57,29 @@ Because its hardware is not sensitive, we can call the OpenUE training module in
 
 ### data module
 
-The code for different operations on different data sets is stored in `data`. The `tokenizer` in the `transformers` library is used to segment the data and then turn the data into the features w
+The code for different operations on different data sets is stored in `data`. The `tokenizer` in the `transformers` library is used to segment the data and then turn the data into the features we need according to different datasets.
+
+## Quick start
+
+### Install
+
+#### Anaconda 
+
+```
+conda create -n openue python=3.8
+conda activate openue
+pip install -r requirements.txt
+conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c nvidia # depend on your GPU driver version
+python setup.py install
+```
+
+#### pip
+
+```shell
+pip install openue
+```
+
+#### pip dev
+
+```shell
+python set
