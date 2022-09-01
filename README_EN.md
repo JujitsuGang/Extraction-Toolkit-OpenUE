@@ -82,4 +82,19 @@ pip install openue
 #### pip dev
 
 ```shell
-python set
+python setup.py develop
+```
+
+#### How to use
+
+The data format is a `json` file, the specific example is as follows. (in the ske dataset)
+
+```json
+{
+	"text": "查尔斯·阿兰基斯（Charles Aránguiz），1989年4月17日出生于智利圣地亚哥，智利职业足球运动员，司职中场，效力于德国足球甲级联赛勒沃库森足球俱乐部",
+	"spo_list": [{
+		"predicate": "出生地",
+		"object_type": "地点",
+		"subject_type": "人物",
+		"object": "圣地亚哥",
+		"subject"
