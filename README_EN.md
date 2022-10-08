@@ -125,4 +125,8 @@ Here we use a small demo to show the training briefly, in which only one batch i
 
 ### notebook quick start
 
-[ske dataset t
+[ske dataset training notebook](https://github.com/zjunlp/OpenUE/blob/pytorch/ske.ipynb)
+Using the Chinese dataset as an example specifically introduces how to use `lit_models`, `models` and `data` in openue. It is convenient for users to construct their own training logic.
+
+
+[colab quick start](https://colab.research.google.com/drive/1VNhFYcqDbXl1b3HzU8sc-NgbhV2ZyYzW?u
