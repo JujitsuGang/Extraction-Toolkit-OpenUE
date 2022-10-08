@@ -110,4 +110,19 @@ The data format is a `json` file, the specific example is as follows. (in the sk
 
 ### Train
 
-Store the data in the `./dataset/` directory for training. If the directory is empty, run the following script to automatically download the data set and pre-trained model and start tra
+Store the data in the `./dataset/` directory for training. If the directory is empty, run the following script to automatically download the data set and pre-trained model and start training. Please keep the network open during the process to avoid model and data download failure.
+
+```shell
+# training the ner module
+./scripts/run_ner.sh
+# training the seq module
+./scripts/run_seq.sh
+```
+
+Here we use a small demo to show the training briefly, in which only one batch is trained to speed up the display.
+
+![框架](./imgs/demo.gif)
+
+### notebook quick start
+
+[ske dataset t
