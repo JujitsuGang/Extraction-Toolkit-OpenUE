@@ -97,4 +97,17 @@ The data format is a `json` file, the specific example is as follows. (in the sk
 		"object_type": "地点",
 		"subject_type": "人物",
 		"object": "圣地亚哥",
-		"subject"
+		"subject": "查尔斯·阿兰基斯"
+	}, {
+		"predicate": "出生日期",
+		"object_type": "Date",
+		"subject_type": "人物",
+		"object": "1989年4月17日",
+		"subject": "查尔斯·阿兰基斯"
+	}]
+}
+```
+
+### Train
+
+Store the data in the `./dataset/` directory for training. If the directory is empty, run the following script to automatically download the data set and pre-trained model and start tra
