@@ -129,4 +129,16 @@ Here we use a small demo to show the training briefly, in which only one batch i
 Using the Chinese dataset as an example specifically introduces how to use `lit_models`, `models` and `data` in openue. It is convenient for users to construct their own training logic.
 
 
-[colab quick start](https://colab.research.google.com/drive/1VNhFYcqDbXl1b3HzU8sc-NgbhV2ZyYzW?u
+[colab quick start](https://colab.research.google.com/drive/1VNhFYcqDbXl1b3HzU8sc-NgbhV2ZyYzW?usp=sharing) Use colab for fast training your OpenUE models.
+
+### support auto parameter tuning（wandb）
+```python
+# just need to replace the default logger by the wandb logger
+logger = pl.loggers.WandbLogger(project="openue")
+```
+
+## Fast depolyment
+
+### Install torchserve-docker
+
+[docker download](https://github.com/pytorch/serve/blob/master/docker/RE
