@@ -141,4 +141,14 @@ logger = pl.loggers.WandbLogger(project="openue")
 
 ### Install torchserve-docker
 
-[docker download](https://github.com/pytorch/serve/blob/master/docker/RE
+[docker download](https://github.com/pytorch/serve/blob/master/docker/README.md)
+
+### Create the `handler` class corresponding to the model
+
+We have placed the corresponding deployment classes `handler_seq.py` and `handler_ner.py` under the `deploy` folder.
+
+```shell
+# use `torch-model-archiver` to pack the files
+# extra-files need the files below
+# 	- `config.json`, `setup_config.json` config。 
+# 	- `vocab.txt` : vocab for th
