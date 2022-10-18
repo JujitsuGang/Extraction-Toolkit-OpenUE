@@ -151,4 +151,12 @@ We have placed the corresponding deployment classes `handler_seq.py` and `handle
 # use `torch-model-archiver` to pack the files
 # extra-files need the files below
 # 	- `config.json`, `setup_config.json` config。 
-# 	- `vocab.txt` : vocab for th
+# 	- `vocab.txt` : vocab for the tokenizer
+# 	- `model.py` : the code for the model
+
+torch-model-archiver --model-name BERTForNER_en  \
+	--version 1.0 --serialized-file ./ner_en/pytorch_model.bin \
+	--handler ./deploy/handler.py \
+	--extra-files "./ner_en/config.json,./ner_en/setup_config.json,./ner_en/vocab.txt,./deploy/model.py" -f
+
+# put the `.mar` file to the model-store
