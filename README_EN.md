@@ -165,4 +165,20 @@ curl -v -X POST "http://localhost:3001/models?initial_workers=1&synchronous=fals
 ```
 ## Members
 
-Zhejiang University：[Ningyu Zhang](https://person.zju.edu.cn/en/ningyu)、Xin Xie、Zhen Bi、Xiang Chen、Haiyang 
+Zhejiang University：[Ningyu Zhang](https://person.zju.edu.cn/en/ningyu)、Xin Xie、Zhen Bi、Xiang Chen、Haiyang Yu、Shumin Deng、Hongbin Ye、Guozhou Zheng、Huajun Chen
+
+Alibaba DAMO Academy：Mosha Chen、Chuanqi Tan、Fei Huang
+
+<br>
+
+## Citation
+
+If you use or extend our work, please cite the following articles:
+
+```
+@inproceedings{DBLP:conf/emnlp/ZhangDBYYCHZC20,
+  author    = {Ningyu Zhang and
+               Shumin Deng and
+               Zhen Bi and
+               Haiyang Yu and
+               Ji
