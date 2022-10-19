@@ -159,4 +159,10 @@ torch-model-archiver --model-name BERTForNER_en  \
 	--handler ./deploy/handler.py \
 	--extra-files "./ner_en/config.json,./ner_en/setup_config.json,./ner_en/vocab.txt,./deploy/model.py" -f
 
-# put the `.mar` file to the model-store
+# put the `.mar` file to the model-store，use curl command to deploy the model
+sudo cp ./BERTForSEQ_en.mar /home/model-server/model-store/
+curl -v -X POST "http://localhost:3001/models?initial_workers=1&synchronous=false&url=BERTForSEQ_en.mar&batch_size=1&max_batch_delay=200"
+```
+## Members
+
+Zhejiang University：[Ningyu Zhang](https://person.zju.edu.cn/en/ningyu)、Xin Xie、Zhen Bi、Xiang Chen、Haiyang 
