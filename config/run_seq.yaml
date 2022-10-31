@@ -1,0 +1,4 @@
+accumulate_grad_batches: 1
+batch_size: 16
+check_val_every_n_epoch: 1
+checkpoint_callback: true
