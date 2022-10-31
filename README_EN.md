@@ -181,4 +181,13 @@ If you use or extend our work, please cite the following articles:
                Shumin Deng and
                Zhen Bi and
                Haiyang Yu and
-               Ji
+               Jiacheng Yang and
+               Mosha Chen and
+               Fei Huang and
+               Wei Zhang and
+               Huajun Chen},
+  editor    = {Qun Liu and
+               David Schlangen},
+  title     = {OpenUE: An Open Toolkit of Universal Extraction from Text},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural
+      
