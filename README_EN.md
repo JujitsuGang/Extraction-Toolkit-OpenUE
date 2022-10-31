@@ -190,4 +190,12 @@ If you use or extend our work, please cite the following articles:
                David Schlangen},
   title     = {OpenUE: An Open Toolkit of Universal Extraction from Text},
   booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural
-      
+               Language Processing: System Demonstrations, {EMNLP} 2020 - Demos,
+               Online, November 16-20, 2020},
+  pages     = {1--8},
+  publisher = {Association for Computational Linguistics},
+  year      = {2020},
+  url       = {https://doi.org/10.18653/v1/2020.emnlp-demos.1},
+  doi       = {10.18653/v1/2020.emnlp-demos.1},
+  timestamp = {Wed, 08 Sep 2021 16:17:48 +0200},
+ 
