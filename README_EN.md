@@ -208,4 +208,6 @@ If you use or extend our work, please cite the following articles:
 - [CogIE](https://github.com/jinzhuoran/CogIE)
 - [OpenNRE](https://github.com/thunlp/OpenNRE)
 - [OmniEvent](https://github.com/THU-KEG/OmniEvent)
-- [DeepKE](https://github.com/zjunlp/deepk
+- [DeepKE](https://github.com/zjunlp/deepke)
+- [OpenIE](https://stanfordnlp.github.io/CoreNLP/openie.html)
+- [RESIN](https://github.com/RESIN-KAIROS/RESIN-pipeline-public)
