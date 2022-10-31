@@ -25,4 +25,20 @@ limit_train_batches: 1.0
 limit_val_batches: 1.0
 litmodel_class: INFERLitModel
 load_checkpoint: null
-log_ev
+log_every_n_steps: 50
+log_gpu_memory: null
+logger: true
+lr: 5.0e-05
+max_epochs: 1
+max_seq_length: 256
+max_steps: null
+max_time: null
+min_epochs: null
+min_steps: null
+model_class: Inference
+model_name_or_path: bert-base-chinese
+move_metrics_to_cpu: false
+multiple_trainloader_mode: max_size_cycle
+ner_model_name_or_path: ner_model
+seq_model_name_or_path: seq_model
+num_
