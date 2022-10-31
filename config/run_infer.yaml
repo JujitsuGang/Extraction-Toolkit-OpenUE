@@ -41,4 +41,22 @@ move_metrics_to_cpu: false
 multiple_trainloader_mode: max_size_cycle
 ner_model_name_or_path: ner_model
 seq_model_name_or_path: seq_model
-num_
+num_nodes: 1
+num_processes: 1
+num_sanity_val_steps: 2
+num_workers: 16
+optimizer: AdamW
+overfit_batches: 0.0
+overwrite_cache: false
+plugins: null
+precision: 32
+prepare_data_per_node: true
+process_position: 0
+profiler: null
+progress_bar_refresh_rate: null
+reload_dataloaders_every_epoch: false
+replace_sampler_ddp: true
+resume_from_checkpoint: null
+seed: 42
+stochastic_weight_avg: false
+syn
