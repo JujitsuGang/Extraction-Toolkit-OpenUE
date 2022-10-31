@@ -198,4 +198,14 @@ If you use or extend our work, please cite the following articles:
   url       = {https://doi.org/10.18653/v1/2020.emnlp-demos.1},
   doi       = {10.18653/v1/2020.emnlp-demos.1},
   timestamp = {Wed, 08 Sep 2021 16:17:48 +0200},
- 
+  biburl    = {https://dblp.org/rec/conf/emnlp/ZhangDBYYCHZC20.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+# Other Knowledge Extraction Open-Source Projects
+
+- [CogIE](https://github.com/jinzhuoran/CogIE)
+- [OpenNRE](https://github.com/thunlp/OpenNRE)
+- [OmniEvent](https://github.com/THU-KEG/OmniEvent)
+- [DeepKE](https://github.com/zjunlp/deepk
