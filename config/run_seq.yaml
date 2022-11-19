@@ -18,4 +18,20 @@ min_steps: null
 model_class: BertForRelationClassification
 model_name_or_path: bert-base-chinese
 model_type: bert
-move_metrics_to_cpu: fals
+move_metrics_to_cpu: false
+multiple_trainloader_mode: max_size_cycle
+num_nodes: 1
+num_processes: 1
+num_sanity_val_steps: 2
+num_workers: 8
+optimizer: AdamW
+overfit_batches: 0.0
+overwrite_cache: false
+path: /home/xx/OpenUE-openue_pytorch/output/epoch=0-Eval/f1=0.91.ckpt
+plugins: null
+precision: 32
+prepare_data_per_node: true
+process_position: 0
+profiler: null
+progress_bar_refresh_rate: null
+reload_datalo
