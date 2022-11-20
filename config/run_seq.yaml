@@ -34,4 +34,19 @@ prepare_data_per_node: true
 process_position: 0
 profiler: null
 progress_bar_refresh_rate: null
-reload_datalo
+reload_dataloaders_every_epoch: false
+replace_sampler_ddp: true
+resume_from_checkpoint: null
+seed: 42
+stochastic_weight_avg: false
+sync_batchnorm: false
+task_name: seq
+terminate_on_nan: false
+tpu_cores: null
+track_grad_norm: -1
+truncated_bptt_steps: null
+val_check_interval: 1.0
+wandb: false
+weight_decay: 0.01
+weights_save_path: null
+weights_summary: top
