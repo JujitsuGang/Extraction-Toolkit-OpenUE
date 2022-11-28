@@ -8,4 +8,6 @@ sudo cp ./BERTForNER_en.mar /home/model-server/model-store/
 
 # ./start_server.sh
 # delete the exist model
-curl -X DELETE http://localhost:3001/mode
+curl -X DELETE http://localhost:3001/models/BERTForNER_en/
+# deploy the model
+curl -v -X POST "http://localhost:3001/models?initial_workers=1&synchronous=false&url=BERTForNER_en.mar&batch_size=1&max_batch_delay=200"
