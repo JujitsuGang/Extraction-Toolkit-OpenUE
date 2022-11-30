@@ -34,3 +34,12 @@ class BertForSEQHandler(BaseHandler, ABC):
         self.initialized = False
 	
     def initialize(self, ctx):
+        """In this initialize function, the BERT model is loaded and
+        the Layer Integrated Gradients Algorithmfor Captum Explanations
+        is initialized here.
+        Args:
+            ctx (context): It is a JSON Object containing information
+            pertaining to the model artefacts parameters.
+        """
+        self.manifest = ctx.manifest
+     
