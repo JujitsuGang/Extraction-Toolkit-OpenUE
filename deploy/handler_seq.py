@@ -50,4 +50,11 @@ class BertForSEQHandler(BaseHandler, ABC):
         self.device = torch.device(
             "cuda:" + str(properties.get("gpu_id"))
             if torch.cuda.is_available() and properties.get("gpu_id") is not None
-      
+            else "cpu"
+        )
+        # read configs for the mode, model_name, etc. from setup_config.json
+        setup_config_path = os.path.join(model_dir, "setup_config.json")
+        if os.path.isfile(setup_config_path):
+            with open(setup_config_path) as setup_config_file:
+                self.setup_config = json.load(setup_config_file)
+     
