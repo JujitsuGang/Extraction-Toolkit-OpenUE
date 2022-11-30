@@ -21,4 +21,16 @@ logger = logging.getLogger(__name__)
 logger.info("Transformers version %s",transformers.__version__)
 
 
-from
+from model import BertForNER, BertForRelationClassification
+
+
+class BertForSEQHandler(BaseHandler, ABC):
+    """
+    Transformers handler class for sequence, token classification and question answering.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.initialized = False
+	
+    def initialize(self, ctx):
