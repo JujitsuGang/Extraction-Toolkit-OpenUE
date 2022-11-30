@@ -57,4 +57,10 @@ class BertForSEQHandler(BaseHandler, ABC):
         if os.path.isfile(setup_config_path):
             with open(setup_config_path) as setup_config_file:
                 self.setup_config = json.load(setup_config_file)
-     
+        else:
+            logger.warning("Missing the setup_config.json file.")
+
+        # Loading the model and tokenizer from checkpoint and config files based on the user's choice of mode
+        # further setup config can be added.
+        if self.setup_config["save_mode"] == "torchscript":
+            self.model = torch.jit.load(model_p
