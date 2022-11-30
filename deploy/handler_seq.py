@@ -63,4 +63,14 @@ class BertForSEQHandler(BaseHandler, ABC):
         # Loading the model and tokenizer from checkpoint and config files based on the user's choice of mode
         # further setup config can be added.
         if self.setup_config["save_mode"] == "torchscript":
-            self.model = torch.jit.load(model_p
+            self.model = torch.jit.load(model_pt_path, map_location=self.device)
+        elif self.setup_config["save_mode"] == "pretrained":
+            # 载入推理模型
+            self.model = BertForRelationClassification.from_pretrained(model_dir)
+            self.model.to(self.device)
+            
+        else:
+            logger.warning("Missing the checkpoint or state_dict.")
+
+        # 载入tokenizer
+       
