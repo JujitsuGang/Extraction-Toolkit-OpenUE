@@ -42,4 +42,12 @@ class BertForSEQHandler(BaseHandler, ABC):
             pertaining to the model artefacts parameters.
         """
         self.manifest = ctx.manifest
-     
+        properties = ctx.system_properties
+        model_dir = properties.get("model_dir")
+        serialized_file = self.manifest["model"]["serializedFile"]
+        model_pt_path = os.path.join(model_dir, serialized_file)
+
+        self.device = torch.device(
+            "cuda:" + str(properties.get("gpu_id"))
+            if torch.cuda.is_available() and properties.get("gpu_id") is not None
+      
