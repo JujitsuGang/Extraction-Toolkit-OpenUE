@@ -73,4 +73,11 @@ class BertForSEQHandler(BaseHandler, ABC):
             logger.warning("Missing the checkpoint or state_dict.")
 
         # 载入tokenizer
-       
+        if any(fname for fname in os.listdir(model_dir) if fname.startswith("vocab.") and os.path.isfile(fname)):
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                model_dir, do_lower_case=self.setup_config["do_lower_case"]
+            )
+        else:
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                self.setup_config["model_name"],
+                d
