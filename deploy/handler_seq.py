@@ -80,4 +80,15 @@ class BertForSEQHandler(BaseHandler, ABC):
         else:
             self.tokenizer = AutoTokenizer.from_pretrained(
                 self.setup_config["model_name"],
-                d
+                do_lower_case=self.setup_config["do_lower_case"],
+            )
+
+        self.model.eval()
+
+        logger.info(
+            "Transformer model from path %s loaded successfully", model_dir
+        )
+
+        # Read the mapping file, index to object name
+        mapping_file_path = os.path.join(model_dir, "index_to_name.json")
+        # Question answering does not n
