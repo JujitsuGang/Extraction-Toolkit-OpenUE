@@ -97,4 +97,14 @@ class BertForSEQHandler(BaseHandler, ABC):
                 with open(mapping_file_path) as f:
                     self.mapping = json.load(f)
             else:
-                logger.warning("Missing the index_to_name.json file."
+                logger.warning("Missing the index_to_name.json file.")
+        self.initialized = True
+    
+    def preprocess(self, requests):
+        # convert the input_ids to (input_ids, attention_mask, token_type_ids)
+        # receive {inputs: {input_ids: xxx}}
+        total_inputs = []
+        for idx, data in enumerate(requests):
+            input_text = data.get("data")
+            if input_text is None:
+  
