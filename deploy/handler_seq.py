@@ -91,4 +91,10 @@ class BertForSEQHandler(BaseHandler, ABC):
 
         # Read the mapping file, index to object name
         mapping_file_path = os.path.join(model_dir, "index_to_name.json")
-        # Question answering does not n
+        # Question answering does not need the index_to_name.json file.
+        if not self.setup_config["mode"] == "question_answering":
+            if os.path.isfile(mapping_file_path):
+                with open(mapping_file_path) as f:
+                    self.mapping = json.load(f)
+            else:
+                logger.warning("Missing the index_to_name.json file."
