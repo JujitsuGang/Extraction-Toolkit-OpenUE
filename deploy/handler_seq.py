@@ -107,4 +107,10 @@ class BertForSEQHandler(BaseHandler, ABC):
         for idx, data in enumerate(requests):
             input_text = data.get("data")
             if input_text is None:
-  
+                input_text = data.get("body")
+            if isinstance(input_text, (bytes, bytearray)):
+                input_text = input_text.decode('utf-8')
+            max_length = int(self.setup_config["max_length"])
+            json_input = input_text
+            logger.info(f"Received text: {input_text}")
+            inputs = json_
