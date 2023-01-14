@@ -113,4 +113,11 @@ class BertForSEQHandler(BaseHandler, ABC):
             max_length = int(self.setup_config["max_length"])
             json_input = input_text
             logger.info(f"Received text: {input_text}")
-            inputs = json_
+            inputs = json_input
+            
+            total_inputs.append(inputs)
+        # pack the batch
+        inputs = dict(
+            input_ids=torch.tensor([_['input_ids'] for _ in total_inputs]).to(self.device),
+            attention_mask=torch.tensor([_['attention_mask'] for _ in total_inputs]).to(self.device),
+            token_type_ids=torch.tensor([_['token_type_ids'] for _ in total_inputs]).to(s
