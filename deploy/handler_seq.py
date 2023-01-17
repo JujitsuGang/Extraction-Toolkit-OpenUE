@@ -120,4 +120,15 @@ class BertForSEQHandler(BaseHandler, ABC):
         inputs = dict(
             input_ids=torch.tensor([_['input_ids'] for _ in total_inputs]).to(self.device),
             attention_mask=torch.tensor([_['attention_mask'] for _ in total_inputs]).to(self.device),
-            token_type_ids=torch.tensor([_['token_type_ids'] for _ in total_inputs]).to(s
+            token_type_ids=torch.tensor([_['token_type_ids'] for _ in total_inputs]).to(self.device),
+        )
+
+        return inputs
+
+    def inference(self, inputs):
+        """Predict the class (or classes) of the received text using the
+        serialized transformers checkpoint.
+        Args:
+            input_batch (list): List of Text Tensors from the pre-process function is passed here
+        Returns:
+            list : It returns a list 
