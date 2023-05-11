@@ -131,4 +131,11 @@ class BertForSEQHandler(BaseHandler, ABC):
         Args:
             input_batch (list): List of Text Tensors from the pre-process function is passed here
         Returns:
-            list : It returns a list 
+            list : It returns a list of the predicted value for the input text
+        """
+        # logger.info(inputs)
+        # sigmoid output 
+        for k, v in inputs.items():
+            if len(v.shape) == 3:
+                inputs[k] = v.squeeze(1)
+        outputs = self.model(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'], token_type_ids=inputs['token
