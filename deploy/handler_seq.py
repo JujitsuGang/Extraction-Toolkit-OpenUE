@@ -138,4 +138,14 @@ class BertForSEQHandler(BaseHandler, ABC):
         for k, v in inputs.items():
             if len(v.shape) == 3:
                 inputs[k] = v.squeeze(1)
-        outputs = self.model(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'], token_type_ids=inputs['token
+        outputs = self.model(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'], token_type_ids=inputs['token_type_ids'])
+        # Handling inference for sequence_classification.
+        # logger.info(outputs)
+        return outputs[0]
+
+    def postprocess(self, data):
+        """
+        The post process function makes use of the output from the inference and converts into a
+        Torchserve supported response output.
+
+        
