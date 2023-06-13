@@ -26,4 +26,10 @@ def _import_class(module_and_class_name: str) -> type:
 
 
 def _setup_parser():
-    """Set up
+    """Set up Python's ArgumentParser with data, model, trainer, and other arguments."""
+    parser = argparse.ArgumentParser(add_help=False)
+
+    # Add Trainer specific arguments, such as --max_epochs, --gpus, --precision
+    trainer_parser = pl.Trainer.add_argparse_args(parser)
+    trainer_parser._action_groups[1].title = "Trainer Args"  # pylint: disable=protected-access
+    parser = argparse.ArgumentParser(add_
