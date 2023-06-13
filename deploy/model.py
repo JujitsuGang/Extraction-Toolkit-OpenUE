@@ -99,3 +99,29 @@ class BertForNER(trans.BertPreTrainedModel):
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
             return_dict=return_dict,
+        )
+
+        # batch_size * 107 * hidden_size
+        sequence_poolout_output = self.dropout(outputs[0])
+        # batch_size * 107 * 6
+        logits = self.token_classification(sequence_poolout_output)
+
+        if label_ids_ner is None:
+            return logits ,outputs[1]
+
+        loss_fct = CrossEntropyLoss()
+        # Only keep active parts of the loss
+        if attention_mask is not None:
+            active_loss = attention_mask.view(-1) == 1
+            active_logits = logits.view(-1, self.num_labels)
+            active_labels = torch.where(
+                active_loss, label_ids_ner.view(-1), torch.tensor(loss_fct.ignore_index).type_as(label_ids_ner)
+            )
+            loss = loss_fct(active_logits, active_labels)
+        else:
+            loss = loss_fct(logits.view(-1, self.num_labels), label_ids_ner.view(-1))
+
+        # if not return_dict:
+        output = (logits,) + outputs[2:]
+        return ((loss,) + output) if loss is not None else output
+    
