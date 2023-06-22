@@ -39,4 +39,10 @@ def _setup_parser():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--litmodel_class", type=str, default="SEQLitModel")
     parser.add_argument("--data_class", type=str, default="REDataset")
-    parser.add_arg
+    parser.add_argument("--model_class", type=str, default="bert.BertForSequenceClassification")
+    parser.add_argument("--load_checkpoint", type=str, default=None)
+
+    # Get the data and model classes, so that we can add their specific arguments
+    temp_args, _ = parser.parse_known_args()
+    data_class = _import_class(f"openue.data.{temp_args.data_class}")
+    model_class = _impor
