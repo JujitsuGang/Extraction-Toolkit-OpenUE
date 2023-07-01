@@ -97,3 +97,9 @@ def main():
     logger = pl.loggers.TensorBoardLogger("training/logs")
     if args.wandb:
         logger = pl.loggers.WandbLogger(project="dialogue_pl")
+        logger.log_hyperparams(vars(args))
+    early_callback = pl.callbacks.EarlyStopping(monitor="Eval/f1", mode="max", patience=5)
+    model_checkpoint = pl.callbacks.ModelCheckpoint(monitor="Eval/f1", mode="max",
+        filename=args.data_dir.split("/")[-1] +'/'+ args.task_name + r'/{epoch}-{Eval/f1:.2f}',
+        dirpath="output",
+        save_weights_only=
