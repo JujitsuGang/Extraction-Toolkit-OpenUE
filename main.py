@@ -54,4 +54,14 @@ def _setup_parser():
     model_group = parser.add_argument_group("Model Args")
     model_class.add_to_argparse(model_group)
 
-    lit_model_group = parser.add_argum
+    lit_model_group = parser.add_argument_group("LitModel Args")
+    lit_models.BaseLitModel.add_to_argparse(lit_model_group)
+
+    parser.add_argument("--help", "-h", action="help")
+    return parser
+
+def _save_model(litmodel, tokenizer, path):
+    os.system(f"mkdir -p {path}")
+    litmodel.model.save_pretrained(path)
+    tokenizer.save_pretrained(path)
+    litmodel.config.
