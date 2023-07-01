@@ -45,4 +45,13 @@ def _setup_parser():
     # Get the data and model classes, so that we can add their specific arguments
     temp_args, _ = parser.parse_known_args()
     data_class = _import_class(f"openue.data.{temp_args.data_class}")
-    model_class = _impor
+    model_class = _import_class(f"openue.models.{temp_args.model_class}")
+
+    # Get data, model, and LitModel specific arguments
+    data_group = parser.add_argument_group("Data Args")
+    data_class.add_to_argparse(data_group)
+
+    model_group = parser.add_argument_group("Model Args")
+    model_class.add_to_argparse(model_group)
+
+    lit_model_group = parser.add_argum
