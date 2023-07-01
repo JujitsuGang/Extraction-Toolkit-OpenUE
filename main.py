@@ -85,4 +85,15 @@ def main():
 
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
-    data_class = _import_class(f"openue.data.{args.d
+    data_class = _import_class(f"openue.data.{args.data_class}")
+    model_class = _import_class(f"openue.models.{args.model_class}")
+    litmodel_class = _import_class(f"openue.lit_models.{args.litmodel_class}")
+
+    data = data_class(args)
+
+    lit_model = litmodel_class(args=args, data_config=data.get_config())
+
+
+    logger = pl.loggers.TensorBoardLogger("training/logs")
+    if args.wandb:
+        logger = pl.loggers.WandbLogger(project="dialogue_pl")
