@@ -77,4 +77,12 @@ def main():
         os.mkdir("config")
     config_file_name = time.strftime("%H:%M:%S", time.localtime()) + ".yaml"
     day_name = time.strftime("%Y-%m-%d")
-    if not os.path.exists(os.path.join("config", day
+    if not os.path.exists(os.path.join("config", day_name)):
+        os.mkdir(os.path.join("config", time.strftime("%Y-%m-%d")))
+    config = vars(args)
+    with open(os.path.join(os.path.join("config", day_name), config_file_name), "w") as file:
+        file.write(yaml.dump(config))
+
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    data_class = _import_class(f"openue.data.{args.d
