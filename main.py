@@ -102,4 +102,16 @@ def main():
     model_checkpoint = pl.callbacks.ModelCheckpoint(monitor="Eval/f1", mode="max",
         filename=args.data_dir.split("/")[-1] +'/'+ args.task_name + r'/{epoch}-{Eval/f1:.2f}',
         dirpath="output",
-        save_weights_only=
+        save_weights_only=True
+    )
+
+
+    callbacks = [early_callback, model_checkpoint]
+
+    # args.weights_summary = "full"  # Print full summary of the model
+    trainer = pl.Trainer.from_argparse_args(args, callbacks=callbacks, logger=logger, default_root_dir="training/logs")
+    
+    
+    test_only = "interactive" in args.task_name 
+
+    if not test_only: trainer.fit(lit_mode
