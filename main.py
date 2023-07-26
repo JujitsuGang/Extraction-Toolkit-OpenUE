@@ -131,4 +131,16 @@ def main():
     # show the inference function
     if test_only:
         inputs = data.tokenizer("姚明出生在中国。", return_tensors='pt')
-        print(lit_model.inferenc
+        print(lit_model.inference(inputs))
+
+
+    trainer.test(lit_model, datamodule=data)
+    
+    if hasattr(lit_model.model, "save_pretrained"):
+        _save_model(lit_model, data.tokenizer, path.rsplit("/", 1)[0])
+    
+
+
+if __name__ == "__main__":
+
+    main()
