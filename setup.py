@@ -14,4 +14,13 @@ setuptools.setup(
     name="openue",
     version="0.2.5",
     author="zxlzr",
-    a
+    author_email="jack16900@gmail.com",
+    description="An open toolkit of universal extraction from text.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/zjunlp/openue",
+    package_dir={"": "src"},
+    packages=setuptools.find_packages("src"),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved
