@@ -22,3 +22,10 @@ def _setup_parser():
     # Add Trainer specific arguments, such as --max_epochs, --gpus, --precision
     # trainer_parser = pl.Trainer.add_argparse_args(parser)
     # trainer_parser._action_groups[1].title = "Trainer Args"  # pylint: disable=protected-access
+    # parser = argparse.ArgumentParser(add_help=False, parents=[trainer_parser])
+
+    # Basic arguments
+    parser.add_argument("--wandb", action="store_true", default=False)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--litmodel_class", type=str, default="SEQLitModel")
+    parser.add_argument("--data_class", type=str, default=
