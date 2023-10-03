@@ -41,4 +41,15 @@ class BaseDataModule(pl.LightningDataModule):
         parser.add_argument(
             "--num_workers", type=int, default=NUM_WORKERS, help="Number of additional processes to load data."
         )
-    
+        parser.add_argument(
+            "--data_dir", type=str, default="./dataset/ske", help="Number of additional processes to load data."
+        )
+        parser.add_argument(
+            "--overwrite_cache", action="store_true"
+        )
+        return parser
+
+
+    def prepare_data(self):
+        """
+        Use this method
