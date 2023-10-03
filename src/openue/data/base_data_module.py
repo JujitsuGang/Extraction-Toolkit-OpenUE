@@ -23,4 +23,11 @@ NUM_WORKERS = 8
 class BaseDataModule(pl.LightningDataModule):
     """
     Base DataModule.
-    Learn more at ht
+    Learn more at https://pytorch-lightning.readthedocs.io/en/stable/datamodules.html
+    """
+
+    def __init__(self, args) -> None:
+        super().__init__()
+        self.args = Config(vars(args)) if args is not None else {}
+        self.batch_size = self.args.get("batch_size", BATCH_SIZE)
+        self.num_workers = self.args.get("n
