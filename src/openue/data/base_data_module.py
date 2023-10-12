@@ -52,4 +52,11 @@ class BaseDataModule(pl.LightningDataModule):
 
     def prepare_data(self):
         """
-        Use this method
+        Use this method to do things that might write to disk or that need to be done only from a single GPU in distributed settings (so don't set state `self.x = y`).
+        """
+        pass
+
+    def setup(self, stage=None):
+        """
+        Split into train, val, test, and set dims.
+        Should assign `torch Dataset` objects to self.data_train, self.data_val, and optionally self.data_
