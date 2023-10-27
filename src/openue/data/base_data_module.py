@@ -69,4 +69,10 @@ class BaseDataModule(pl.LightningDataModule):
         return DataLoader(self.data_train, shuffle=True, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True)
 
     def val_dataloader(self):
-        return DataLoader(self.data_val, shuffle=
+        return DataLoader(self.data_val, shuffle=False, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True)
+
+    def test_dataloader(self):
+        return DataLoader(self.data_test, shuffle=False, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True)
+
+    def get_config(self):
+        return dict(num_labels=self.num_labels)
