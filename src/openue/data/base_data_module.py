@@ -59,4 +59,14 @@ class BaseDataModule(pl.LightningDataModule):
     def setup(self, stage=None):
         """
         Split into train, val, test, and set dims.
-        Should assign `torch Dataset` objects to self.data_train, self.data_val, and optionally self.data_
+        Should assign `torch Dataset` objects to self.data_train, self.data_val, and optionally self.data_test.
+        """
+        self.data_train = None
+        self.data_val = None
+        self.data_test = None
+
+    def train_dataloader(self):
+        return DataLoader(self.data_train, shuffle=True, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True)
+
+    def val_dataloader(self):
+        return DataLoader(self.data_val, shuffle=
