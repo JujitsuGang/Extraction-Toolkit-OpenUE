@@ -17,4 +17,13 @@ class REDataset(BaseDataModule):
         super().__init__(args)
         self.prepare_data()
         self.tokenizer = AutoTokenizer.from_pretrained(self.args.model_name_or_path)
-        self.num_labels = le
+        self.num_labels = len(get_labels_ner()) if args.task_name == "ner" else len(get_labels_seq(args))
+        self.collate_fn = collator_set[args.task_name]
+        
+        num_relations = len(get_labels_seq(args))
+
+        # 默认加入特殊token来表示关系
+        add_flag = False
+        for i in range(num_relations):
+            if f"[relation{i}]" not in self.tokenizer.get_added_vocab():
+           
