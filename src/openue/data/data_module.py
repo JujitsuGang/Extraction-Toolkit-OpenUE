@@ -26,4 +26,12 @@ class REDataset(BaseDataModule):
         add_flag = False
         for i in range(num_relations):
             if f"[relation{i}]" not in self.tokenizer.get_added_vocab():
-           
+                add_flag = True
+                break
+        
+        if add_flag:
+            relation_tokens = [f"[relation{i}]" for i in range(num_relations)]
+            num_added_tokens = self.tokenizer.add_special_tokens({'additional_special_tokens': relation_tokens})
+            logger.info(f"add total special tokens: {num_added_tokens} \n {relation_tokens}")
+
+    def setup(self, s
