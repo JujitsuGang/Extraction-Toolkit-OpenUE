@@ -34,4 +34,11 @@ class REDataset(BaseDataModule):
             num_added_tokens = self.tokenizer.add_special_tokens({'additional_special_tokens': relation_tokens})
             logger.info(f"add total special tokens: {num_added_tokens} \n {relation_tokens}")
 
-    def setup(self, s
+    def setup(self, stage=None):
+        self.data_train = get_dataset("train", self.args, self.tokenizer)
+        self.data_val = get_dataset("dev", self.args, self.tokenizer)
+        self.data_test = get_dataset("test", self.args, self.tokenizer)
+
+    def prepare_data(self):
+        # download the dataset and move it to the dataset fold
+        name = self.args.data_dir.split("
