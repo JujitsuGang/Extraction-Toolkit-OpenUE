@@ -41,4 +41,13 @@ class REDataset(BaseDataModule):
 
     def prepare_data(self):
         # download the dataset and move it to the dataset fold
-        name = self.args.data_dir.split("
+        name = self.args.data_dir.split("/")[-1]
+        if not os.path.exists(self.args.data_dir):
+            os.system(f"wget  http://47.92.96.190/dataset/{name}.tar.gz")
+            os.system(f"tar -xzvf {name}.tar.gz")
+            os.system("mkdir dataset")
+            os.system(f"mv {name} ./dataset")
+            os.system(f"rm {name}.tar.gz")
+
+    def train_dataloader(self):
+        r
