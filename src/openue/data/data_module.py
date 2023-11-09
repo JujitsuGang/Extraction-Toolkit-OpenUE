@@ -56,4 +56,9 @@ class REDataset(BaseDataModule):
         return DataLoader(self.data_val, shuffle=False, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True, collate_fn=self.collate_fn)
 
     def test_dataloader(self):
-        return DataLoa
+        return DataLoader(self.data_test, shuffle=False, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True, collate_fn=self.collate_fn)
+
+    @staticmethod
+    def add_to_argparse(parser):
+        BaseDataModule.add_to_argparse(parser)
+        parser.add_argument("--task_name", type=str, default="ner",choices=["ner", "seq", "interactive"], help="[normal
