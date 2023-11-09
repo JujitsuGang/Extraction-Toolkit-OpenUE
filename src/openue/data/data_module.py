@@ -50,4 +50,10 @@ class REDataset(BaseDataModule):
             os.system(f"rm {name}.tar.gz")
 
     def train_dataloader(self):
-        r
+        return DataLoader(self.data_train, shuffle=True, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True, collate_fn=self.collate_fn)
+
+    def val_dataloader(self):
+        return DataLoader(self.data_val, shuffle=False, batch_size=self.batch_size, num_workers=self.num_workers, pin_memory=True, collate_fn=self.collate_fn)
+
+    def test_dataloader(self):
+        return DataLoa
