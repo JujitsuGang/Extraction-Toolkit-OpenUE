@@ -67,4 +67,4 @@ class REDataset(BaseDataModule):
         return parser
 
     def get_config(self):
-        return dict(num_tokens=len
+        return dict(num_tokens=len(self.tokenizer), num_labels=self.num_labels, tokenizer=self.tokenizer)
