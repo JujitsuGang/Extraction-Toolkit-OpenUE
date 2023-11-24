@@ -26,4 +26,16 @@ from .utils import OpenUEDataset, get_labels_ner, get_labels_seq, Split
 
 def get_dataset(mode, args, tokenizer):
     dataset = OpenUEDataset(
-        
+        data_dir=args.data_dir,
+        tokenizer=tokenizer,
+        labels_seq=get_labels_seq(args),
+        labels_ner=get_labels_ner(),
+        model_type=args.model_type,
+        max_seq_length=args.max_seq_length,
+        overwrite_cache=args.overwrite_cache,
+        mode=Split(mode), # train, dev, test
+        task=args.task_name # seq ner interactive
+    )
+    
+    
+    re
