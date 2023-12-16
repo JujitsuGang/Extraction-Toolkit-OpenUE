@@ -14,4 +14,15 @@ import numpy as np
 
 import jsonlines
 
-from transformers import P
+from transformers import PreTrainedTokenizer, is_torch_available, BatchEncoding
+from transformers.utils.dummy_pt_objects import DebertaForQuestionAnswering
+
+logger = logging.getLogger(__name__)
+
+
+def start_of_chunk(prev_tag, tag, prev_type, type_):
+    """Checks if a chunk started between the previous and current word.
+
+    Args:
+        prev_tag: previous chunk tag.
+        tag: current chun
