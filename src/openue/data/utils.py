@@ -39,4 +39,12 @@ def start_of_chunk(prev_tag, tag, prev_type, type_):
 
     if prev_tag == 'E' and tag == 'E': chunk_start = True
     if prev_tag == 'E' and tag == 'I': chunk_start = True
-    if pr
+    if prev_tag == 'S' and tag == 'E': chunk_start = True
+    if prev_tag == 'S' and tag == 'I': chunk_start = True
+    if prev_tag == 'O' and tag == 'E': chunk_start = True
+    if prev_tag == 'O' and tag == 'I': chunk_start = True
+
+    if tag != 'O' and tag != '.' and prev_type != type_:
+        chunk_start = True
+
+    return chunk_start
