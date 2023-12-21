@@ -25,4 +25,18 @@ def start_of_chunk(prev_tag, tag, prev_type, type_):
 
     Args:
         prev_tag: previous chunk tag.
-        tag: current chun
+        tag: current chunk tag.
+        prev_type: previous type.
+        type_: current type.
+
+    Returns:
+        chunk_start: boolean.
+    """
+    chunk_start = False
+
+    if tag == 'B': chunk_start = True
+    if tag == 'S': chunk_start = True
+
+    if prev_tag == 'E' and tag == 'E': chunk_start = True
+    if prev_tag == 'E' and tag == 'I': chunk_start = True
+    if pr
