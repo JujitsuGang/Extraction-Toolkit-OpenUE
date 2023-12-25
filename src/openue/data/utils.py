@@ -48,3 +48,21 @@ def start_of_chunk(prev_tag, tag, prev_type, type_):
         chunk_start = True
 
     return chunk_start
+
+
+def end_of_chunk(prev_tag, tag, prev_type, type_):
+    """Checks if a chunk ended between the previous and current word.
+
+    Args:
+        prev_tag: previous chunk tag.
+        tag: current chunk tag.
+        prev_type: previous type.
+        type_: current type.
+
+    Returns:
+        chunk_end: boolean.
+    """
+    chunk_end = False
+
+    if prev_tag == 'E': chunk_end = True
+    
