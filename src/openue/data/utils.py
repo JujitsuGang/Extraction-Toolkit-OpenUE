@@ -65,4 +65,11 @@ def end_of_chunk(prev_tag, tag, prev_type, type_):
     chunk_end = False
 
     if prev_tag == 'E': chunk_end = True
-    
+    if prev_tag == 'S': chunk_end = True
+
+    if prev_tag == 'B' and tag == 'B': chunk_end = True
+    if prev_tag == 'B' and tag == 'S': chunk_end = True
+    if prev_tag == 'B' and tag == 'O': chunk_end = True
+    if prev_tag == 'I' and tag == 'B': chunk_end = True
+    if prev_tag == 'I' and tag == 'S': chunk_end = True
+    if prev_tag == 'I' and tag == 'O': chunk_end = T
