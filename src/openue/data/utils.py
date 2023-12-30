@@ -72,4 +72,20 @@ def end_of_chunk(prev_tag, tag, prev_type, type_):
     if prev_tag == 'B' and tag == 'O': chunk_end = True
     if prev_tag == 'I' and tag == 'B': chunk_end = True
     if prev_tag == 'I' and tag == 'S': chunk_end = True
-    if prev_tag == 'I' and tag == 'O': chunk_end = T
+    if prev_tag == 'I' and tag == 'O': chunk_end = True
+
+    if prev_tag != 'O' and prev_tag != '.' and prev_type != type_:
+        chunk_end = True
+
+    return chunk_end
+
+
+def get_entities(seq, suffix=False):
+    # for nested list
+    if any(isinstance(s, list) for s in seq):
+        seq = [item for sublist in seq for item in sublist + ['O']]
+
+    prev_tag = 'O'
+    prev_type = ''
+    begin_offset = 0
+    chunks 
