@@ -99,4 +99,17 @@ def get_entities(seq, suffix=False):
 
         if end_of_chunk(prev_tag, tag, prev_type, type_):
             chunks.append((prev_type, begin_offset, i-1))
-        if start_of_ch
+        if start_of_chunk(prev_tag, tag, prev_type, type_):
+            begin_offset = i
+        prev_tag = tag
+        prev_type = type_
+
+    return chunks
+
+
+def f1_score(y_true, y_pred, average='micro', suffix=False):
+    true_entities = set(get_entities(y_true, suffix))
+    pred_entities = set(get_entities(y_pred, suffix))
+
+    nb_correct = len(true_entities & pred_entities)
+    nb_pred = len(pre
