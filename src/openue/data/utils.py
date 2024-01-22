@@ -112,4 +112,16 @@ def f1_score(y_true, y_pred, average='micro', suffix=False):
     pred_entities = set(get_entities(y_pred, suffix))
 
     nb_correct = len(true_entities & pred_entities)
-    nb_pred = len(pre
+    nb_pred = len(pred_entities)
+    nb_true = len(true_entities)
+
+    p = nb_correct / nb_pred if nb_pred > 0 else 0
+    r = nb_correct / nb_true if nb_true > 0 else 0
+    score = 2 * p * r / (p + r) if p + r > 0 else 0
+
+    return score
+
+
+def accuracy_score(y_true, y_pred):
+    if any(isinstance(s, list) for s in y_true):
+        y_true = [item for sublist in y_true for item in s
