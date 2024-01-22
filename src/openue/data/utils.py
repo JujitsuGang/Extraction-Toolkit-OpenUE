@@ -124,4 +124,17 @@ def f1_score(y_true, y_pred, average='micro', suffix=False):
 
 def accuracy_score(y_true, y_pred):
     if any(isinstance(s, list) for s in y_true):
-        y_true = [item for sublist in y_true for item in s
+        y_true = [item for sublist in y_true for item in sublist]
+        y_pred = [item for sublist in y_pred for item in sublist]
+
+    nb_correct = sum(y_t==y_p for y_t, y_p in zip(y_true, y_pred))
+    nb_true = len(y_true)
+
+    score = nb_correct / nb_true
+
+    return score
+
+
+def precision_score(y_true, y_pred, average='micro', suffix=False):
+    true_entities = set(get_entities(y_true, suffix))
+    pred_entities = 
