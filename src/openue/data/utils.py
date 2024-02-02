@@ -171,4 +171,16 @@ class OutputExample:
     r: str
     t: str
 
-@datac
+@dataclass
+class InputFeatures:
+    input_ids: List[int]
+    attention_mask: List[int]
+    token_type_ids: Optional[List[int]] = None
+    label_ids_seq: Optional[List[int]] = None
+    label_ids_ner: Optional[List[int]] = None
+    words: str = None
+
+@dataclass
+class InputFeatures_Interactive:
+    input_ids: List[int] = None
+    attention_mask: List[int] = None
