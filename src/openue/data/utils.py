@@ -202,4 +202,18 @@ if is_torch_available():
     class OpenUEDataset(Dataset):
 
         features: List[InputFeatures]
-        pad_token_label_id: int 
+        pad_token_label_id: int = nn.CrossEntropyLoss().ignore_index
+
+        def __init__(
+            self,
+            data_dir: str,
+            labels_seq: List,
+            labels_ner: List,
+            tokenizer: PreTrainedTokenizer,
+            model_type: str,
+            max_seq_length: Optional[int] = None,
+            overwrite_cache=False,
+            mode: Split = Split.train,
+            task='seq'
+
+        )
