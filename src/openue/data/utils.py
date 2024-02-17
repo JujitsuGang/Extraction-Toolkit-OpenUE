@@ -184,3 +184,22 @@ class InputFeatures:
 class InputFeatures_Interactive:
     input_ids: List[int] = None
     attention_mask: List[int] = None
+    token_type_ids: List[int] = None
+    triples: List[List[int]] = None
+
+
+
+class Split(Enum):
+    train = "train"
+    dev = "dev"
+    test = "test"
+
+if is_torch_available():
+    import torch
+    from torch import nn
+    from torch.utils.data.dataset import Dataset
+
+    class OpenUEDataset(Dataset):
+
+        features: List[InputFeatures]
+        pad_token_label_id: int 
