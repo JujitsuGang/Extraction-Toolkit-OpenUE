@@ -225,4 +225,10 @@ if is_torch_available():
                 data_dir, "cached_{}_{}.examples".format(mode.value, tokenizer.__class__.__name__),
             )
 
-            if task =
+            if task == 'seq':
+                cached_features_file = os.path.join(
+                    data_dir, "cached_{}_{}_seq".format(mode.value, tokenizer.__class__.__name__),
+                )
+            elif task == 'ner':
+                cached_features_file = os.path.join(
+                    data_dir, "cached_{}_{}_ner".format(mode.value, tokenizer.__class__.__name__),
