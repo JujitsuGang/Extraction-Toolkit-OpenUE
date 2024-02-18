@@ -232,3 +232,12 @@ if is_torch_available():
             elif task == 'ner':
                 cached_features_file = os.path.join(
                     data_dir, "cached_{}_{}_ner".format(mode.value, tokenizer.__class__.__name__),
+                )
+            elif task == 'interactive':
+                cached_features_file = os.path.join(
+                    data_dir, "cached_{}_{}_interactive".format(mode.value, tokenizer.__class__.__name__),
+                )
+
+            # features是否存在
+            if os.path.exists(cached_features_file) and not overwrite_cache:
+                logger.info(f"Loading fe
