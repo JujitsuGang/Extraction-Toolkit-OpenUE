@@ -216,4 +216,13 @@ if is_torch_available():
             mode: Split = Split.train,
             task='seq'
 
-        )
+        ):
+        
+            with open(f"{data_dir}/rel2id.json", "r") as file:
+                rel2id = json.load(file)
+            # Load data features from cache or dataset file
+            cached_examples_file = os.path.join(
+                data_dir, "cached_{}_{}.examples".format(mode.value, tokenizer.__class__.__name__),
+            )
+
+            if task =
