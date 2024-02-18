@@ -240,4 +240,10 @@ if is_torch_available():
 
             # features是否存在
             if os.path.exists(cached_features_file) and not overwrite_cache:
-                logger.info(f"Loading fe
+                logger.info(f"Loading features from cached file {cached_features_file}")
+                self.features = torch.load(cached_features_file)
+            else:
+                # examples是否存在
+                if os.path.exists(cached_examples_file) and not overwrite_cache:
+                    logger.info(f"Loading example from dataset file at {data_dir}")
+                    examples = torch
