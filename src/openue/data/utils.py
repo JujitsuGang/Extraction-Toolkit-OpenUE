@@ -246,4 +246,11 @@ if is_torch_available():
                 # examples是否存在
                 if os.path.exists(cached_examples_file) and not overwrite_cache:
                     logger.info(f"Loading example from dataset file at {data_dir}")
-                    examples = torch
+                    examples = torch.load(cached_examples_file)
+                else:
+                    logger.info(f"Creating example from cached file {cached_examples_file}")
+                    examples = read_examples_from_file(data_dir, mode)
+                    torch.save(examples, cached_examples_file)
+
+                logger.info(f"Creating features from dataset file at {data_dir}")
+                if task == 'seq':
