@@ -254,3 +254,11 @@ if is_torch_available():
 
                 logger.info(f"Creating features from dataset file at {data_dir}")
                 if task == 'seq':
+                    self.features = convert_examples_to_seq_features(
+                        examples,
+                        # labels,
+                        labels_seq=labels_seq,
+                        labels_ner=labels_ner,
+                        max_seq_length=max_seq_length,
+                        tokenizer=tokenizer,
+         
