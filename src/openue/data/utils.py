@@ -267,4 +267,11 @@ if is_torch_available():
                         sep_token=tokenizer.sep_token,
                         sep_token_extra=False,
                         pad_on_left=bool(tokenizer.padding_side == "left"),
-                   
+                        pad_token=tokenizer.pad_token_id,
+                        pad_token_segment_id=tokenizer.pad_token_type_id,
+                        pad_token_label_id=self.pad_token_label_id,
+                    )
+                elif task == 'ner':
+                    self.features = convert_examples_to_ner_features(
+                        examples,
+                       
