@@ -261,4 +261,10 @@ if is_torch_available():
                         labels_ner=labels_ner,
                         max_seq_length=max_seq_length,
                         tokenizer=tokenizer,
-         
+                        cls_token_at_end=bool(model_type in ["xlnet"]),
+                        cls_token=tokenizer.cls_token,
+                        cls_token_segment_id=2 if model_type in ["xlnet"] else 0,
+                        sep_token=tokenizer.sep_token,
+                        sep_token_extra=False,
+                        pad_on_left=bool(tokenizer.padding_side == "left"),
+                   
