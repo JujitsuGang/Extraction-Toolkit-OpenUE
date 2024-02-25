@@ -274,4 +274,10 @@ if is_torch_available():
                 elif task == 'ner':
                     self.features = convert_examples_to_ner_features(
                         examples,
-                       
+                        labels_seq=labels_seq,
+                        labels_ner=labels_ner,
+                        max_seq_length=max_seq_length,
+                        tokenizer=tokenizer,
+                        cls_token_at_end=bool(model_type in ["xlnet"]),
+                        cls_token=tokenizer.cls_token,
+                        cls_token_segment_id=2 if m
