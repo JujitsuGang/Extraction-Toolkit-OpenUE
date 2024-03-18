@@ -293,4 +293,15 @@ if is_torch_available():
                         examples,
                         labels_seq=labels_seq,
                         labels_ner=labels_ner,
-                        max_seq_length=max_
+                        max_seq_length=max_seq_length,
+                        tokenizer=tokenizer,
+                        rel2id=rel2id
+                    )
+
+                logger.info(f"Saving features into cached file {cached_features_file}")
+                torch.save(self.features, cached_features_file)
+
+        def __len__(self):
+            return len(self.features)
+
+        def __getite
