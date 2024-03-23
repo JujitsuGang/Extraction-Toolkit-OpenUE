@@ -341,4 +341,17 @@ def convert_examples_to_seq_features(
     cls_token_at_end=False,
     cls_token="[CLS]",
     cls_token_segment_id=1,
-    sep_tok
+    sep_token="[SEP]",
+    sep_token_extra=False,
+    pad_on_left=False,
+    pad_token=0,
+    pad_token_segment_id=0,
+    pad_token_label_id=-100,
+    sequence_a_segment_id=0,
+    mask_padding_with_zero=True,
+):
+    features = []
+    label2id = {label: i for i, label in enumerate(labels_seq)}
+    cnt = 0
+
+    for (ex_index, example) in tqdm(enumerate(examples), total=len(example
