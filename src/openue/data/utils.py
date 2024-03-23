@@ -304,4 +304,17 @@ if is_torch_available():
         def __len__(self):
             return len(self.features)
 
-        def __getite
+        def __getitem__(self, i) -> InputFeatures:
+            return self.features[i]
+
+import json
+def read_examples_from_file(data_dir, mode: Union[Split, str]) -> List[InputExample]:
+    if isinstance(mode, Split):
+        mode = mode.value
+    file_path = os.path.join(data_dir, f"{mode}.json")
+
+    examples = []
+
+    with open(file_path, "r+", encoding="utf8") as f:
+
+        t
