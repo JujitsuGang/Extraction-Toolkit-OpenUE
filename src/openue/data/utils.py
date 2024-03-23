@@ -326,4 +326,19 @@ def read_examples_from_file(data_dir, mode: Union[Split, str]) -> List[InputExam
             for triple in item['spo_list']:
                 triples.append([triple['subject'], triple['predicate'], triple['object']])
 
-            examples.append(InputExample(text_id=text_id, words=text, triples=tr
+            examples.append(InputExample(text_id=text_id, words=text, triples=triples))
+            text_id = text_id + 1
+
+    return examples
+
+
+def convert_examples_to_seq_features(
+    examples: List[InputExample],
+    labels_seq: List[str],
+    labels_ner: List[str],
+    max_seq_length: int,
+    tokenizer: PreTrainedTokenizer,
+    cls_token_at_end=False,
+    cls_token="[CLS]",
+    cls_token_segment_id=1,
+    sep_tok
