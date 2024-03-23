@@ -317,4 +317,13 @@ def read_examples_from_file(data_dir, mode: Union[Split, str]) -> List[InputExam
 
     with open(file_path, "r+", encoding="utf8") as f:
 
-        t
+        text_id = 0
+        
+        for line in f.readlines():
+            item = eval(line)
+            text = item['text']
+            triples = []
+            for triple in item['spo_list']:
+                triples.append([triple['subject'], triple['predicate'], triple['object']])
+
+            examples.append(InputExample(text_id=text_id, words=text, triples=tr
