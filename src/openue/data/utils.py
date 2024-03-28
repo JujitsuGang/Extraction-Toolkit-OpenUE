@@ -354,4 +354,14 @@ def convert_examples_to_seq_features(
     label2id = {label: i for i, label in enumerate(labels_seq)}
     cnt = 0
 
-    for (ex_index, example) in tqdm(enumerate(examples), total=len(example
+    for (ex_index, example) in tqdm(enumerate(examples), total=len(examples)):
+        inputs = tokenizer(
+            preprocess(example.words),
+            add_special_tokens=True,
+            # return_overflowing_tokens=True,
+            truncation="longest_first",
+            max_length=max_seq_length,
+        )
+        label_ids_seq = []
+        for triple in example.triples:
+            label_ids_seq.append(label2id[t
