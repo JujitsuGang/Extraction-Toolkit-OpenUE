@@ -364,4 +364,11 @@ def convert_examples_to_seq_features(
         )
         label_ids_seq = []
         for triple in example.triples:
-            label_ids_seq.append(label2id[t
+            label_ids_seq.append(label2id[triple[1]])
+        if len(label_ids_seq) == 0:
+            cnt += 1
+            continue
+        label_ids_seq = torch.sum(torch.nn.functional.one_hot(torch.tensor(label_ids_seq), num_classes=len(labels_seq)), dim=0).float()
+        # the relation may show more than once, [1,2,1,0] -> [1,1,1,0]
+        label_ids_seq[label_ids_seq>0] = 1
+
