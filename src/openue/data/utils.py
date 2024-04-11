@@ -382,4 +382,17 @@ def convert_examples_to_seq_features(
 
 def preprocess(text):
     return text.lower()
-    r
+    return " ".join([_ for _ in text]).lower()
+
+def convert_examples_to_ner_features(
+    examples: List[InputExample],
+    labels_seq: List[str],
+    labels_ner: List[str],
+    max_seq_length: int,
+    tokenizer: PreTrainedTokenizer,
+    cls_token_at_end=False,
+    cls_token="[CLS]",
+    cls_token_segment_id=1,
+    sep_token="[SEP]",
+    sep_token_extra=False,
+    pad_
