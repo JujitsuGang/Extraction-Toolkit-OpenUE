@@ -372,3 +372,14 @@ def convert_examples_to_seq_features(
         # the relation may show more than once, [1,2,1,0] -> [1,1,1,0]
         label_ids_seq[label_ids_seq>0] = 1
 
+        features.append(InputFeatures(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'],
+                                          token_type_ids=inputs['token_type_ids'], label_ids_seq=label_ids_seq))
+
+    logger.warning(f"total {cnt} samples error in the dataset!")
+    return features
+
+
+
+def preprocess(text):
+    return text.lower()
+    r
