@@ -395,4 +395,13 @@ def convert_examples_to_ner_features(
     cls_token_segment_id=1,
     sep_token="[SEP]",
     sep_token_extra=False,
-    pad_
+    pad_on_left=False,
+    pad_token=0,
+    pad_token_segment_id=0,
+    pad_token_label_id=-100,
+    sequence_a_segment_id=0,
+    mask_padding_with_zero=True,
+):
+    # 将relation ids转化为特殊字符对应的ids,避免了relation 表示和原来的词表进行冲突
+    start_idx = tokenizer("[relation0]", add_special_tokens=False)['input_ids'][0]
+    label_map_seq = {label: i for i, label in enumerate(
