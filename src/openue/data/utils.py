@@ -404,4 +404,15 @@ def convert_examples_to_ner_features(
 ):
     # 将relation ids转化为特殊字符对应的ids,避免了relation 表示和原来的词表进行冲突
     start_idx = tokenizer("[relation0]", add_special_tokens=False)['input_ids'][0]
-    label_map_seq = {label: i for i, label in enumerate(
+    label_map_seq = {label: i for i, label in enumerate(labels_seq)}
+    seq_label2ids = {label: i+start_idx for i, label in enumerate(labels_seq)}
+    label_map_ner = {label: i for i, label in enumerate(labels_ner)}
+
+    features = []
+    counter = 0
+
+    def find_word_in_texts(word_ids, texts_ids):
+        length = len(word_ids)
+        for i, W in enumerate(texts_ids):
+            if (i+length) >= len(texts_ids): break
+            if text
