@@ -415,4 +415,16 @@ def convert_examples_to_ner_features(
         length = len(word_ids)
         for i, W in enumerate(texts_ids):
             if (i+length) >= len(texts_ids): break
-            if text
+            if texts_ids[i: i + length] == word_ids:
+                return i, i + length
+        return None, None
+
+    for (ex_index, example) in enumerate(examples):
+        # 用bert分词，转换为token
+        # text = example.text
+        if ex_index % 10_000 == 0:
+            logger.info("Writing example %d of %d", ex_index, len(examples))
+        
+
+        text = example.words
+       
