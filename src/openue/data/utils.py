@@ -436,4 +436,14 @@ def convert_examples_to_ner_features(
             if relation not in tmp_triples:
                 tmp_triples[relation] = [[subject, relation, object_]]
             else:
-                tmp_triples[relation].append([subject, r
+                tmp_triples[relation].append([subject, relation, object_])
+        
+        my_triples = []
+        for k, v in tmp_triples.items():
+            my_triples.append([[v[i][0] for i in range(len(v))], k, [v[i][2] for i in range(len(v))]])
+        
+        
+        hard_to_solve = 0
+        #  triple [[subject list], r, [object list]]
+        for triple in my_triples:
+            subject_list = trip
