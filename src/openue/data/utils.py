@@ -427,4 +427,13 @@ def convert_examples_to_ner_features(
         
 
         text = example.words
-       
+        
+        tmp_triples = {}
+        for triple in example.triples:
+            subject = preprocess(triple[0])
+            relation = triple[1]
+            object_ = preprocess(triple[2])
+            if relation not in tmp_triples:
+                tmp_triples[relation] = [[subject, relation, object_]]
+            else:
+                tmp_triples[relation].append([subject, r
