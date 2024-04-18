@@ -446,4 +446,14 @@ def convert_examples_to_ner_features(
         hard_to_solve = 0
         #  triple [[subject list], r, [object list]]
         for triple in my_triples:
-            subject_list = trip
+            subject_list = triple[0]
+            relation = triple[1]
+            object_list = triple[2]
+            
+            # same entity map as subject and object            
+            if set(subject_list) & set(object_list) :
+                hard_to_solve += 1
+
+            # cls w1 w2 .. sep w3 w4 sep 000000000
+            # token_type
+            # 000000000000000 1111111111
