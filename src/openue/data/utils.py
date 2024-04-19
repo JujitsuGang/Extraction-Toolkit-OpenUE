@@ -457,3 +457,13 @@ def convert_examples_to_ner_features(
             # cls w1 w2 .. sep w3 w4 sep 000000000
             # token_type
             # 000000000000000 1111111111
+            # 转换为id，加上cls以及seq等
+            # {"input_ids":[], "token_type_ids":[], "attention_mask":[]}
+            inputs = tokenizer(
+                preprocess(text),
+                add_special_tokens=True,
+                max_length=max_seq_length-2,
+                truncation="longest_first"
+            )
+
+            inputs['token_type_ids'] = t
