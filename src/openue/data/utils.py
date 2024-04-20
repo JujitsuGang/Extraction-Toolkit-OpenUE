@@ -512,3 +512,16 @@ def convert_examples_to_ner_features(
             label_ner[-2] = 'Relation'
             # label_ner[-2] = 'O'
             label_ner[-3] = 'SEP'
+            
+           
+
+            assert len(label_ner) == len(inputs['input_ids']) == len(inputs['token_type_ids']) ==\
+                        len(inputs['attention_mask'])
+
+            # 关系抽取标签
+            label_id_seq = label_map_seq[relation]
+
+            # NER标签转换
+            label_id_ner = [label_map_ner[i] for i in label_ner]
+            if ex_index == 0:
+                lo
