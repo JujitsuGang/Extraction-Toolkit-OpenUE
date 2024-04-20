@@ -495,4 +495,11 @@ def convert_examples_to_ner_features(
             # 标注object
             
             for object_ in object_list:
-                object_ids = tokenizer.encode(object_, add_spec
+                object_ids = tokenizer.encode(object_, add_special_tokens=False)
+                [start_idx, end_idx] = find_word_in_texts(object_ids, split_text_ids)
+                if start_idx is None:
+                    # logger.info('语料有问题(object)！%d', ex_index)
+                    counter = counter + 1
+                    continue_flag = True
+                    break
+                label_ner[start_idx: end_idx] = ['I-OBJ
