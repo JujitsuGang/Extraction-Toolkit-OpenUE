@@ -469,4 +469,15 @@ def convert_examples_to_ner_features(
             inputs['token_type_ids'] = tokenizer.create_token_type_ids_from_sequences(inputs['input_ids'][1:-1],
                                                                                        [seq_label2ids[relation]])
             # label_map_seq[relation] 加入关系信息, 使用seq_label2ids
-            inputs['input_ids'] = inputs['input_ids'] + [seq_label2ids[relation], tokenizer.sep_token_i
+            inputs['input_ids'] = inputs['input_ids'] + [seq_label2ids[relation], tokenizer.sep_token_id]
+            inputs['attention_mask'] = inputs['attention_mask'] + [1, 1]
+
+            # 添加split_text文本的标签
+            # B-SUB I-SUB / B-OBJ I-OBJ
+            split_text_ids = inputs['input_ids']
+            # ["O", "B-SUB", "I-SUB", "B-OBJ", "I-OBJ", "Relation"]
+            # 默认所有位置都为'O'
+            label_ner = ['O' for i in range(len(split_text_ids))]
+
+            # 标注subject
+            co
