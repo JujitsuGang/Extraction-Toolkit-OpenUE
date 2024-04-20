@@ -524,4 +524,13 @@ def convert_examples_to_ner_features(
             # NER标签转换
             label_id_ner = [label_map_ner[i] for i in label_ner]
             if ex_index == 0:
-                lo
+                logger.info(example)
+                logger.info(inputs)
+                logger.info(label_id_ner)
+
+            features.append(
+                InputFeatures(
+                    input_ids=inputs["input_ids"],
+                    attention_mask=inputs["attention_mask"],
+                    token_type_ids=inputs["token_type_ids"],
+                    label_ids_ner=
