@@ -466,4 +466,7 @@ def convert_examples_to_ner_features(
                 truncation="longest_first"
             )
 
-            inputs['token_type_ids'] = t
+            inputs['token_type_ids'] = tokenizer.create_token_type_ids_from_sequences(inputs['input_ids'][1:-1],
+                                                                                       [seq_label2ids[relation]])
+            # label_map_seq[relation] 加入关系信息, 使用seq_label2ids
+            inputs['input_ids'] = inputs['input_ids'] + [seq_label2ids[relation], tokenizer.sep_token_i
