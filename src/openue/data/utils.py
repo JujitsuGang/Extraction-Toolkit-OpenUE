@@ -502,4 +502,13 @@ def convert_examples_to_ner_features(
                     counter = counter + 1
                     continue_flag = True
                     break
-                label_ner[start_idx: end_idx] = ['I-OBJ
+                label_ner[start_idx: end_idx] = ['I-OBJ' for i in range(len(object_ids))]
+                label_ner[start_idx] = 'B-OBJ'
+
+            if continue_flag: continue
+            # 标注最后三个字符串，SEP、Relation、SEP
+            label_ner[0] = 'CLS'
+            label_ner[-1] = 'SEP'
+            label_ner[-2] = 'Relation'
+            # label_ner[-2] = 'O'
+            label_ner[-3] = 'SEP'
