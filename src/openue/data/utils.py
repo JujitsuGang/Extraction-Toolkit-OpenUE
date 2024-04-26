@@ -556,4 +556,17 @@ def convert_examples_to_interactive_features(
     rel2id: Dict =None
 ):
     label_map_seq = {label: i for i, label in enumerate(labels_seq)}
-    label_map_ner = {label: i for i, label in enumerate(l
+    label_map_ner = {label: i for i, label in enumerate(labels_ner)}
+
+    features = []
+    counter = 0
+
+    def find_word_in_texts(input_ids, entity_ids):
+        length = len(entity_ids)
+        for i, W in enumerate(input_ids):
+            if i+length <= len(input_ids) and input_ids[i: i + length] == entity_ids:
+                return i, i + length
+        return None, None
+    
+
+    for (ex_index, example) in enumer
