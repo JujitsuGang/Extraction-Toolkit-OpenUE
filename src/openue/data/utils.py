@@ -542,4 +542,18 @@ def convert_examples_to_ner_features(
 
     
     print('语料有问题句子比例是', str(counter/len(examples)))
-    logger.warning(f"hard to solve total {hard_to_solve} samples. Write code to f
+    logger.warning(f"hard to solve total {hard_to_solve} samples. Write code to fix it!")
+    return features
+
+
+
+def convert_examples_to_interactive_features(
+    examples: List[InputExample],
+    labels_seq: List[str],
+    labels_ner: List[str],
+    max_seq_length: int,
+    tokenizer: PreTrainedTokenizer,
+    rel2id: Dict =None
+):
+    label_map_seq = {label: i for i, label in enumerate(labels_seq)}
+    label_map_ner = {label: i for i, label in enumerate(l
