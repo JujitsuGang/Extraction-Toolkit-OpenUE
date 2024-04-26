@@ -533,4 +533,13 @@ def convert_examples_to_ner_features(
                     input_ids=inputs["input_ids"],
                     attention_mask=inputs["attention_mask"],
                     token_type_ids=inputs["token_type_ids"],
-                    label_ids_ner=
+                    label_ids_ner=label_id_ner,
+                    label_ids_seq=label_id_seq,
+                    words=text
+                )
+            )
+            assert len(inputs['input_ids']) <= max_seq_length
+
+    
+    print('语料有问题句子比例是', str(counter/len(examples)))
+    logger.warning(f"hard to solve total {hard_to_solve} samples. Write code to f
