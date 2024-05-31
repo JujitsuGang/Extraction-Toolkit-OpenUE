@@ -569,4 +569,15 @@ def convert_examples_to_interactive_features(
         return None, None
     
 
-    for (ex_index, example) in enumer
+    for (ex_index, example) in enumerate(examples):
+        # 用bert分词，转换为token
+        # text = example.text
+        if ex_index % 10_000 == 0:
+            logger.info("Writing example %d of %d", ex_index, len(examples))
+
+        text = example.words
+        inputs = tokenizer(
+            preprocess(text),
+            add_special_tokens=True,
+            max_length=max_seq_length-2,
+            truncation="longest_first"
