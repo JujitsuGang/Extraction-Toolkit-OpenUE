@@ -581,3 +581,13 @@ def convert_examples_to_interactive_features(
             add_special_tokens=True,
             max_length=max_seq_length-2,
             truncation="longest_first"
+        )
+        bad_flag = False
+        
+        triples = []
+        
+        for triple in example.triples:
+            h, r, t = triple
+            h_ids = tokenizer(preprocess(h), add_special_tokens=False)['input_ids']
+            h_s, h_e = find_word_in_texts(inputs['input_ids'], h_ids)
+            t_ids = tokenizer(preprocess(t), add_special_tokens=False)[
