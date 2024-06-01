@@ -618,4 +618,7 @@ def get_labels_ner() -> List[str]:
     return ["O", "B-SUB", "I-SUB", "B-OBJ", "I-OBJ", "Relation", "CLS", "SEP"]
 
 def get_labels_seq(args) -> List[str]:
-    with 
+    with open(f"{args.data_dir}/rel2id.json", "r") as file:
+        t = json.load(file)
+        class_label = t.keys()
+    # class_label = ['Empty', '丈夫', '上映时间', '专业代码', '主持人', '主演', '主角', '人口数量', '作曲', '作者', '作词', '修业年限', '出品公司', '出版社', '出生地', '出生日期','创始人', '制片人', '占地面积', '号', '嘉宾', '国籍', '妻子', '字', '官方语言', '导演', '总部地点', '成立日期', '所在城市', '所属专辑', '改编自', '朝代', '歌手', '母亲', 
