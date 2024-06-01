@@ -590,4 +590,16 @@ def convert_examples_to_interactive_features(
             h, r, t = triple
             h_ids = tokenizer(preprocess(h), add_special_tokens=False)['input_ids']
             h_s, h_e = find_word_in_texts(inputs['input_ids'], h_ids)
-            t_ids = tokenizer(preprocess(t), add_special_tokens=False)[
+            t_ids = tokenizer(preprocess(t), add_special_tokens=False)['input_ids']
+            t_s, t_e = find_word_in_texts(inputs['input_ids'], t_ids)
+            r = rel2id[r]
+            triples.append([h_s,h_e,t_s,t_e,r])
+            if None in triples:
+                bad_flag = True
+
+        if bad_flag: continue
+
+        features.append(
+            InputFeatures_Interactive(
+                input_ids=inputs["input_ids"],
+                attention_mask=inputs["attention_
