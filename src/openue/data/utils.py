@@ -632,4 +632,15 @@ def openue_data_collator_seq(features):
 
     for f in features:
         length = len(f.input_ids)
-        distance =
+        distance = max_length - length
+        add_zero = [0 for i in range(distance)]
+
+        features_ = {}
+
+        features_['input_ids'] = f.input_ids + add_zero  # 补0
+        features_['attention_mask'] = f.attention_mask + add_zero  # 补0
+        features_['token_type_ids'] = f.token_type_ids + add_zero  # 补0
+
+        
+        features_['label_ids_seq'] = f.label_ids_seq
+        features_new
