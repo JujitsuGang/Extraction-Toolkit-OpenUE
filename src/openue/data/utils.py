@@ -602,4 +602,20 @@ def convert_examples_to_interactive_features(
         features.append(
             InputFeatures_Interactive(
                 input_ids=inputs["input_ids"],
-                attention_mask=inputs["attention_
+                attention_mask=inputs["attention_mask"],
+                token_type_ids=inputs["token_type_ids"],
+                triples=triples
+            )
+        )
+    logger.info(examples[0])
+    logger.info(features[0])
+
+    return features
+
+
+
+def get_labels_ner() -> List[str]:
+    return ["O", "B-SUB", "I-SUB", "B-OBJ", "I-OBJ", "Relation", "CLS", "SEP"]
+
+def get_labels_seq(args) -> List[str]:
+    with 
