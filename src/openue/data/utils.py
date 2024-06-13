@@ -643,4 +643,17 @@ def openue_data_collator_seq(features):
 
         
         features_['label_ids_seq'] = f.label_ids_seq
-        features_new
+        features_new.append(features_)
+
+    # 将结构体格式变成dict格式
+    if not isinstance(features_new[0], (dict, BatchEncoding)):
+        features_new = [vars(f) for f in features_new]
+
+    first = features_new[0]
+    batch = {}
+
+
+    for k, v in first.items():
+        if v is not None and not isinstance(v, str):
+            if isinstance(v, torch.Tensor):
+                batch[k] =
