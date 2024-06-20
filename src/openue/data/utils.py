@@ -669,4 +669,13 @@ def openue_data_collator_ner(features):
 
     features_new = []
     for f in features:
-        length = len(f
+        length = len(f.input_ids)
+        distance = max_length - length
+        add_zero = [0 for i in range(distance)]
+        add_special = [0 for i in range(distance)] 
+
+        features_ = {}
+
+        features_['input_ids'] = f.input_ids + add_zero  # 补0
+        features_['attention_mask'] = f.attention_mask + add_zero  # 补0
+        features_['token_type_ids'] = f.tok
