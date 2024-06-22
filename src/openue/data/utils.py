@@ -695,4 +695,13 @@ def openue_data_collator_ner(features):
 
     for k, v in first.items():
         if k not in ("label_ids_seq", "label_ids_ner") and v is not None and not isinstance(v, str):
-            if
+            if isinstance(v, torch.Tensor):
+                batch[k] = torch.stack([f[k] for f in features_new])
+            else:
+                batch[k] = torch.tensor([f[k] for f in features_new], dtype=torch.long)
+
+    return batch
+
+def openue_data_collator_interactive(features):
+    max_length_seq = [len(f.input_ids) for f in features]
+    max_length_seq = ma
