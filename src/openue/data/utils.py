@@ -689,4 +689,10 @@ def openue_data_collator_ner(features):
     first = features_new[0]
     batch = {}
 
-    label = first["label
+    label = first["label_ids_ner"].item() if isinstance(first["label_ids_ner"], torch.Tensor) else first["label_ids_ner"]
+    dtype = torch.long if isinstance(label, int) else torch.long
+    batch["label_ids_ner"] = torch.tensor([f["label_ids_ner"] for f in features_new], dtype=dtype)
+
+    for k, v in first.items():
+        if k not in ("label_ids_seq", "label_ids_ner") and v is not None and not isinstance(v, str):
+            if
