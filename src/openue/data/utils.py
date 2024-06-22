@@ -678,4 +678,15 @@ def openue_data_collator_ner(features):
 
         features_['input_ids'] = f.input_ids + add_zero  # 补0
         features_['attention_mask'] = f.attention_mask + add_zero  # 补0
-        features_['token_type_ids'] = f.tok
+        features_['token_type_ids'] = f.token_type_ids + add_zero  # 补0
+        features_['label_ids_ner'] = f.label_ids_ner + add_special  # 补0, 这里仅仅为了补齐的最长长度, loss计算中有mask存在会被忽略
+
+        features_new.append(features_)
+
+    if not isinstance(features_new[0], (dict, BatchEncoding)):
+        features_new = [vars(f) for f in features_new]
+
+    first = features_new[0]
+    batch = {}
+
+    label = first["label
