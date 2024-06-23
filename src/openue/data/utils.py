@@ -704,4 +704,16 @@ def openue_data_collator_ner(features):
 
 def openue_data_collator_interactive(features):
     max_length_seq = [len(f.input_ids) for f in features]
-    max_length_seq = ma
+    max_length_seq = max(max_length_seq)
+
+    features_new = []
+    for f in features:
+        length = len(f.input_ids)
+        distance = max_length_seq - length
+        add_zero = [0 for i in range(distance)]
+
+        features_ = {}
+
+        features_['input_ids'] = f.input_ids + add_zero  # 补0
+        features_['attention_mask'] = f.attention_mask + add_zero  # 补0
+        fea
