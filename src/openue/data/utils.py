@@ -716,4 +716,18 @@ def openue_data_collator_interactive(features):
 
         features_['input_ids'] = f.input_ids + add_zero  # 补0
         features_['attention_mask'] = f.attention_mask + add_zero  # 补0
-        fea
+        features_['token_type_ids'] = f.token_type_ids + add_zero  # 补0
+
+        features_['triples'] = f.triples
+
+        features_new.append(features_)
+
+    # 将结构体格式变成dict格式
+    if not isinstance(features_new[0], (dict, BatchEncoding)):
+        features_new = [vars(f) for f in features_new]
+
+    first = features_new[0]
+    batch = {}
+
+    # 这就是完美batch
+    for k, v in first.i
