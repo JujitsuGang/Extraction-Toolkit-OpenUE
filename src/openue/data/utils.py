@@ -730,4 +730,13 @@ def openue_data_collator_interactive(features):
     batch = {}
 
     # 这就是完美batch
-    for k, v in first.i
+    for k, v in first.items():
+        if k not in ("triples") and v is not None and not isinstance(v, str):
+            if isinstance(v, torch.Tensor):
+                batch[k] = torch.stack([f[k] for f in features_new])
+            else:
+                batch[k] = torch.tensor([f[k] for f in features_new], dtype=torch.long)
+        else:
+            batch[k] = [f[k] for f in features_new]
+
+    
