@@ -739,4 +739,4 @@ def openue_data_collator_interactive(features):
         else:
             batch[k] = [f[k] for f in features_new]
 
-    
+    return batch
