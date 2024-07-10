@@ -22,4 +22,16 @@ class BertForRelationClassification(trans.BertPreTrainedModel):
         attention_mask=None,
         token_type_ids=None,
         position_ids=None,
-        head_mask=N
+        head_mask=None,
+        inputs_embeds=None,
+        label_ids_seq=None,
+        output_attentions=None,
+        output_hidden_states=None,
+        return_dict=None,
+    ):
+
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+        # import pdb; pdb.set_trace()
+        outputs = self.bert(
+            input_ids,
+            attention_ma
