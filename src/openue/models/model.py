@@ -52,4 +52,19 @@ class BertForRelationClassification(trans.BertPreTrainedModel):
         if label_ids_seq is None:
             return (relation_output_sigmoid, relation_output, cls_output)
         else:
-            loss = self.loss_fn(relation_output, label_ids_
+            loss = self.loss_fn(relation_output, label_ids_seq)
+
+            return (loss, relation_output_sigmoid, relation_output, cls_output)
+
+    def add_to_argparse(parser):
+        parser.add_argument("--model_type", type=str, default="bert")
+
+
+
+class BertForNER(trans.BertPreTrainedModel):
+
+    def __init__(self, config, **model_kwargs):
+        super().__init__(config)
+
+        self.num_labels = config.num_labels
+     
