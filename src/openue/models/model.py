@@ -45,4 +45,11 @@ class BertForRelationClassification(trans.BertPreTrainedModel):
         )
 
         sequence_output = outputs[0]
-  
+        cls_output = sequence_output[:, 0, :]
+        relation_output = self.relation_classification(cls_output)
+        relation_output_sigmoid = torch.sigmoid(relation_output)
+
+        if label_ids_seq is None:
+            return (relation_output_sigmoid, relation_output, cls_output)
+        else:
+            loss = self.loss_fn(relation_output, label_ids_
