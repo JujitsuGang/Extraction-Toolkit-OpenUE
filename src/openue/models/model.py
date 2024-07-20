@@ -79,4 +79,17 @@ class BertForNER(trans.BertPreTrainedModel):
         input_ids=None,
         attention_mask=None,
         token_type_ids=None,
-        position_ids=N
+        position_ids=None,
+        head_mask=None,
+        inputs_embeds=None,
+        # labels=None,
+        output_attentions=None,
+        output_hidden_states=None,
+        return_dict=None,
+        label_ids_seq=None,
+        label_ids_ner=None
+    ):
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        outputs = self.bert(
+            inp
