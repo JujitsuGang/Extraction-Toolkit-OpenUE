@@ -67,4 +67,16 @@ class BertForNER(trans.BertPreTrainedModel):
         super().__init__(config)
 
         self.num_labels = config.num_labels
-     
+        self.bert = trans.BertModel(config)
+
+        self.dropout = torch.nn.Dropout(config.hidden_dropout_prob)
+        self.token_classification = torch.nn.Linear(config.hidden_size, config.num_labels)
+        self.init_weights()
+
+
+    def forward(
+        self,
+        input_ids=None,
+        attention_mask=None,
+        token_type_ids=None,
+        position_ids=N
