@@ -132,4 +132,18 @@ class BertForNER(trans.BertPreTrainedModel):
         parser.add_argument("--model_type", type=str, default="bert")
 
 
-class Inference(pl.LightningMo
+class Inference(pl.LightningModule):
+    """
+        input the text, 
+        return the triples
+    """
+    def __init__(self, args):
+        super().__init__()
+        self.args = args
+        # init the labels
+        self._init_labels()    
+        self._init_models()
+        
+        
+        self.mode = "event" if "event" in args.task_name else "triple"
+        self.start_idx = sel
