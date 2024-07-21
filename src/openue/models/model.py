@@ -166,4 +166,13 @@ class Inference(pl.LightningModule):
 
     
     
-    def _init_models(sel
+    def _init_models(self):
+        model_name_or_path = self.args.seq_model_name_or_path
+        config = AutoConfig.from_pretrained(
+            model_name_or_path,
+            num_labels=self.num_labels_seq,
+            label2id={label: i for i, label in enumerate(self.labels_seq)},
+        )
+        
+        self.model_seq = BertForRelationClassification.from_pretrained(
+ 
