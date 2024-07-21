@@ -113,4 +113,11 @@ class BertForNER(trans.BertPreTrainedModel):
 
         loss_fct = CrossEntropyLoss()
         # Only keep active parts of the loss
-        if atten
+        if attention_mask is not None:
+            active_loss = attention_mask.view(-1) == 1
+            active_logits = logits.view(-1, self.num_labels)
+            active_labels = torch.where(
+                active_loss, label_ids_ner.view(-1), torch.tensor(loss_fct.ignore_index).type_as(label_ids_ner)
+            )
+            loss = loss_fct(active_logits, active_labels)
+   
