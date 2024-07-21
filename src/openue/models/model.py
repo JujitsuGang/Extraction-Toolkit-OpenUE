@@ -120,4 +120,16 @@ class BertForNER(trans.BertPreTrainedModel):
                 active_loss, label_ids_ner.view(-1), torch.tensor(loss_fct.ignore_index).type_as(label_ids_ner)
             )
             loss = loss_fct(active_logits, active_labels)
-   
+        else:
+            loss = loss_fct(logits.view(-1, self.num_labels), label_ids_ner.view(-1))
+
+        # if not return_dict:
+        output = (logits,) + outputs[2:]
+        return ((loss,) + output) if loss is not None else output
+    
+    
+    def add_to_argparse(parser):
+        parser.add_argument("--model_type", type=str, default="bert")
+
+
+class Inference(pl.LightningMo
