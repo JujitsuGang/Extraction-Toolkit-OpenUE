@@ -103,4 +103,14 @@ class BertForNER(trans.BertPreTrainedModel):
             return_dict=return_dict,
         )
 
-        # batc
+        # batch_size * 107 * hidden_size
+        sequence_poolout_output = self.dropout(outputs[0])
+        # batch_size * 107 * 6
+        logits = self.token_classification(sequence_poolout_output)
+
+        if label_ids_ner is None:
+            return logits ,outputs[1]
+
+        loss_fct = CrossEntropyLoss()
+        # Only keep active parts of the loss
+        if atten
