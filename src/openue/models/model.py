@@ -156,4 +156,14 @@ class Inference(pl.LightningModule):
     
     def _init_labels(self):
         self.labels_ner = get_labels_ner()
-        self.label_map_ner: Dict[int, str] = {i: label for i, labe
+        self.label_map_ner: Dict[int, str] = {i: label for i, label in enumerate(self.labels_ner)}
+        self.num_labels_ner = len(self.labels_ner)
+
+        # 读取seq的label
+        self.labels_seq = get_labels_seq(self.args)
+        self.label_map_seq: Dict[int, str] = {i: label for i, label in enumerate(self.labels_seq)}
+        self.num_labels_seq = len(self.labels_seq)
+
+    
+    
+    def _init_models(sel
