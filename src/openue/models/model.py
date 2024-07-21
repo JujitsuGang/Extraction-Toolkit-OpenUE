@@ -146,4 +146,14 @@ class Inference(pl.LightningModule):
         
         
         self.mode = "event" if "event" in args.task_name else "triple"
-        self.start_idx = sel
+        self.start_idx = self.tokenizer("[relation0]", add_special_tokens=False)['input_ids'][0]
+        
+        if self.mode == "event":
+            self.process = self.event_process
+        else:
+            self.process = self.normal_process
+        
+    
+    def _init_labels(self):
+        self.labels_ner = get_labels_ner()
+        self.label_map_ner: Dict[int, str] = {i: label for i, labe
