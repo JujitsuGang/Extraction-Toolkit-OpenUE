@@ -175,4 +175,14 @@ class Inference(pl.LightningModule):
         )
         
         self.model_seq = BertForRelationClassification.from_pretrained(
- 
+            model_name_or_path,
+            config=config,
+        )
+
+        model_name_or_path = self.args.ner_model_name_or_path
+        # 读取待训练的ner模型
+        config = AutoConfig.from_pretrained(
+            model_name_or_path,
+            num_labels=self.num_labels_ner,
+            id2label=self.label_map_ner,
+            label2id={label: i for 
