@@ -185,4 +185,17 @@ class Inference(pl.LightningModule):
             model_name_or_path,
             num_labels=self.num_labels_ner,
             id2label=self.label_map_ner,
-            label2id={label: i for 
+            label2id={label: i for i, label in enumerate(self.labels_ner)},
+        )
+        self.model_ner = BertForNER.from_pretrained(
+            model_name_or_path,
+            config=config,
+        )
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_name_or_path,
+            use_fast=False,
+        )
+
+    def forward(self, inputs):
+        """
+        两种方案，一种直接所有relation搞起来，一种使用
