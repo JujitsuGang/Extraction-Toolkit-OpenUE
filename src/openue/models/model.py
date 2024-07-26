@@ -198,4 +198,11 @@ class Inference(pl.LightningModule):
 
     def forward(self, inputs):
         """
-        两种方案，一种直接所有relation搞起来，一种使用
+        两种方案，一种直接所有relation搞起来，一种使用动态batch size, 针对出现的relation进行forward
+        首先通过model_seq获得输入语句的类别标签，batch中每一个样本中含有的关系，
+        之后选择大于阈值(0.5)的关系，将其输入取出来得到[batch_size*num_relation, seq_length]的输入向量，以及每一个样本对应的关系数量，
+        将其增加了关系类别embedding之后，输入到model_ner中，得到input_ids中每一个token的类别，之后常规的实体识别。
+        
+        """
+        # for k, v in inputs.items():
+        #     if isinstance(v, t
