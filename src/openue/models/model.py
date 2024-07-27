@@ -205,4 +205,15 @@ class Inference(pl.LightningModule):
         
         """
         # for k, v in inputs.items():
-        #     if isinstance(v, t
+        #     if isinstance(v, torch.Tensor):
+        #         inputs[k] = v.to(self.device)
+
+        inputs_seq = {'input_ids': inputs['input_ids'],
+                    'token_type_ids': inputs['token_type_ids'],
+                    'attention_mask': inputs['attention_mask'],
+                    }
+
+        with torch.no_grad():
+            outputs_seq = self.model_seq(**inputs_seq)
+
+         
