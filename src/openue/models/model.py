@@ -216,4 +216,14 @@ class Inference(pl.LightningModule):
         with torch.no_grad():
             outputs_seq = self.model_seq(**inputs_seq)
 
-         
+            batch_size = inputs_seq['input_ids'].shape[0]
+            num_relations = len(self.label_map_seq.keys())
+            max_length = inputs_seq['input_ids'].shape[1]
+
+            # [batch_size, num_relation]
+            relation_output_sigmoid = outputs_seq[0]
+
+            # 多关系预测
+            mask_relation_output_sigmoid = relation_output_sigmoid > 0.5
+            # # 这个0.5是超参数，超参数
+       
