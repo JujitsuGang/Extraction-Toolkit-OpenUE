@@ -226,4 +226,10 @@ class Inference(pl.LightningModule):
             # 多关系预测
             mask_relation_output_sigmoid = relation_output_sigmoid > 0.5
             # # 这个0.5是超参数，超参数
-       
+            # 如果没有关系那就选一个最大概率的关系抽取。
+            for i in range(batch_size):
+                if torch.sum(mask_relation_output_sigmoid[i]) == 0:
+                    max_relation_idx = torch.max(relation_output_sigmoid[i], dim=0)[1].item()
+                    mask_relation_output_sigmoid[i][max_relation_idx] = 1
+
+            mask_relation_output_sigmoid = mask_rel
