@@ -232,4 +232,10 @@ class Inference(pl.LightningModule):
                     max_relation_idx = torch.max(relation_output_sigmoid[i], dim=0)[1].item()
                     mask_relation_output_sigmoid[i][max_relation_idx] = 1
 
-            mask_relation_output_sigmoid = mask_rel
+            mask_relation_output_sigmoid = mask_relation_output_sigmoid.long()
+            # mask_output [batch_size*num_relation] 表示哪一个输入是需要的
+            mask_output = mask_relation_output_sigmoid.view(-1)
+
+            # relation 特殊表示，需要拼接 input_ids :[SEP relation]  attention_mask: [1 1] token_type_ids:[1 1]
+            # relation_index shape : [batch_size, num_relations]
+            relation_index = torch.arange(self.start
