@@ -238,4 +238,8 @@ class Inference(pl.LightningModule):
 
             # relation 特殊表示，需要拼接 input_ids :[SEP relation]  attention_mask: [1 1] token_type_ids:[1 1]
             # relation_index shape : [batch_size, num_relations]
-            relation_index = torch.arange(self.start
+            relation_index = torch.arange(self.start_idx, self.start_idx+num_relations).to(self.device).expand(batch_size, num_relations)
+            # 需要拼接的部分1：REL， 选取拼接的部分 [batch_size * xxx 不定]
+            relation_ids = torch.masked_select(relation_index, mask_relation_output_sigmoid.bool())
+            # 需要拼接的部分2：SEP
+            cat_sep = torch.full((relation_ids.shape[0], 1), 102).long().to(s
