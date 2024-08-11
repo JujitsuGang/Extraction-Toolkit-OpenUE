@@ -242,4 +242,11 @@ class Inference(pl.LightningModule):
             # 需要拼接的部分1：REL， 选取拼接的部分 [batch_size * xxx 不定]
             relation_ids = torch.masked_select(relation_index, mask_relation_output_sigmoid.bool())
             # 需要拼接的部分2：SEP
-            cat_sep = torch.full((relation_ids.shape[0], 1), 102).long().to(s
+            cat_sep = torch.full((relation_ids.shape[0], 1), 102).long().to(self.device)
+            # 需要拼接的部分3：[1]
+            cat_one = torch.full((relation_ids.shape[0], 1), 1).long().to(self.device)
+            # 需要拼接的部4：[0]
+            cat_zero = torch.full((relation_ids.shape[0], 1), 0).long().to(self.device)
+
+            # 需要原来的input_ids 扩展到relation num维度。
+            input_ids_ner = torch.unsqueeze(inputs['input
