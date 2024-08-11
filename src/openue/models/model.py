@@ -249,4 +249,10 @@ class Inference(pl.LightningModule):
             cat_zero = torch.full((relation_ids.shape[0], 1), 0).long().to(self.device)
 
             # 需要原来的input_ids 扩展到relation num维度。
-            input_ids_ner = torch.unsqueeze(inputs['input
+            input_ids_ner = torch.unsqueeze(inputs['input_ids'], 1) # [batch_size, 1, seq_length]
+            # [batch_size, 50, max_length], 复制50份
+            input_ids_ner = input_ids_ner.expand(-1, len(self.label_map_seq.keys()), -1)
+            # [batch_size * 50, max_length]
+            input_ids_ner_reshape = input_ids_ner.reshape(batch_size * num_relations, max_length)
+            # 选择预测正确的所有关系
+            mask = mask_output.unsqueeze(dim=1
