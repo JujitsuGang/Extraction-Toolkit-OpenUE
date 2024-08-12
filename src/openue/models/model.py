@@ -255,4 +255,10 @@ class Inference(pl.LightningModule):
             # [batch_size * 50, max_length]
             input_ids_ner_reshape = input_ids_ner.reshape(batch_size * num_relations, max_length)
             # 选择预测正确的所有关系
-            mask = mask_output.unsqueeze(dim=1
+            mask = mask_output.unsqueeze(dim=1).expand(-1, max_length)  # [batch_size * num_relations, max_length]
+            # 选取了正确的input_ids
+            input_ids = torch.masked_select(input_ids_ner_reshape, mask.bool()).view(-1, max_length)
+            # n(选出来的关系数字) * max_length
+            # n >> batch_size, 因为一句话中有多个关系
+            # 添加 sep relation_ids 需要增加的东西
+            input_ids = t
