@@ -261,4 +261,10 @@ class Inference(pl.LightningModule):
             # n(选出来的关系数字) * max_length
             # n >> batch_size, 因为一句话中有多个关系
             # 添加 sep relation_ids 需要增加的东西
-            input_ids = t
+            input_ids = torch.cat((input_ids, cat_zero), 1)
+            input_ids_ner = torch.cat((input_ids, cat_zero), 1)
+
+            # 利用attention中1的求和的到rel_pos的位置
+            attention_mask_ner = torch.unsqueeze(inputs['attention_mask'], 1)
+            # [batch_size, 50, max_length], 复制50份
+            attention_mask_ner = attention_mask_ner.expand(-1, len(self.label_map_seq.keys()), -1
