@@ -289,4 +289,13 @@ class Inference(pl.LightningModule):
             input_ids_ner[rel_pos_mask_plus.bool()] = cat_sep.squeeze()
 
             # 拼接token_type_ids的输入
-            token_type_ids_ner = to
+            token_type_ids_ner = torch.zeros(rel_number_find, max_length_find).to(self.device)
+            token_type_ids_ner[rel_pos_mask.bool()] = 1
+            token_type_ids_ner[rel_pos_mask_plus.bool()] = 1
+            token_type_ids_ner = token_type_ids_ner.long()
+
+            # 拼接attention_mask的输入
+            # 拼接 0
+            tmp4 = torch.cat((tmp3, cat_zero), dim=1)
+            # 拼接 0
+            tmp5 = 
