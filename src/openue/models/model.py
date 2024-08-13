@@ -319,4 +319,14 @@ class Inference(pl.LightningModule):
             _, results = torch.max(outputs_ner, dim=2)
             results = results.cpu().tolist()
             results = [[self.label_map_ner[__] for __ in _] for _ in results]
-            attention_position_np = rel_pos.cpu
+            attention_position_np = rel_pos.cpu().numpy()
+
+            attention_position_list = attention_position_np.tolist()
+            predict_relation_list = relation_ids.long().tolist()
+            input_ids_list = input_ids_ner.cpu().tolist()
+                
+
+            output = []
+            input_ids = []
+            for idx, result in enumerate(results):
+                tmp1 = r
