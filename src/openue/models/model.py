@@ -274,4 +274,11 @@ class Inference(pl.LightningModule):
             tmp1 = mask_output.unsqueeze(dim=1)  # [200, 1]
             mask = tmp1.expand(-1, max_length)  # [200, 79]
             tmp2 = torch.masked_select(attention_mask_ner_reshape, mask.bool())
-         
+            # n(选出来的关系数字) * max_length
+            # n >> batch_size, 因为一句话中有多个关系
+            tmp3 = tmp2.view(-1, max_length)
+            # 利用attention中1的求和的到rel_pos的位置
+            rel_pos = torch.sum(tmp3, dim=1)
+            (rel_number_find, max_length_find) = input_ids_ner.shape
+            one_hot = torch.sparse.torch.eye(max_length_find).long().to(self.device)
+   
