@@ -281,4 +281,12 @@ class Inference(pl.LightningModule):
             rel_pos = torch.sum(tmp3, dim=1)
             (rel_number_find, max_length_find) = input_ids_ner.shape
             one_hot = torch.sparse.torch.eye(max_length_find).long().to(self.device)
-   
+            rel_pos_mask = one_hot.index_select(0, rel_pos)
+            rel_pos_mask_plus = one_hot.index_select(0, rel_pos+1)
+
+            # 拼接input_ids的输入
+            input_ids_ner[rel_pos_mask.bool()] = relation_ids
+            input_ids_ner[rel_pos_mask_plus.bool()] = cat_sep.squeeze()
+
+            # 拼接token_type_ids的输入
+            token_type_ids_ner = to
