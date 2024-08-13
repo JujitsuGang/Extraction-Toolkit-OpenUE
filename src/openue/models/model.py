@@ -307,4 +307,16 @@ class Inference(pl.LightningModule):
                 'input_ids': input_ids_ner,
                 'token_type_ids': token_type_ids_ner,
                 'attention_mask': attention_mask_ner_tmp,
-         
+            }
+
+            try:
+                outputs_ner = self.model_ner(**inputs_ner)[0]
+            except BaseException:
+                print('23')
+            
+
+
+            _, results = torch.max(outputs_ner, dim=2)
+            results = results.cpu().tolist()
+            results = [[self.label_map_ner[__] for __ in _] for _ in results]
+            attention_position_np = rel_pos.cpu
