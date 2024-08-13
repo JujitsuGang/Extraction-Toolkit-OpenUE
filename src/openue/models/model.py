@@ -267,4 +267,11 @@ class Inference(pl.LightningModule):
             # 利用attention中1的求和的到rel_pos的位置
             attention_mask_ner = torch.unsqueeze(inputs['attention_mask'], 1)
             # [batch_size, 50, max_length], 复制50份
-            attention_mask_ner = attention_mask_ner.expand(-1, len(self.label_map_seq.keys()), -1
+            attention_mask_ner = attention_mask_ner.expand(-1, len(self.label_map_seq.keys()), -1)
+            # [batch_size * 50, max_length]
+            attention_mask_ner_reshape = attention_mask_ner.reshape(batch_size * num_relations, max_length)
+            # 选择预测正确的所有关系
+            tmp1 = mask_output.unsqueeze(dim=1)  # [200, 1]
+            mask = tmp1.expand(-1, max_length)  # [200, 79]
+            tmp2 = torch.masked_select(attention_mask_ner_reshape, mask.bool())
+         
