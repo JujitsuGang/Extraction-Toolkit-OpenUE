@@ -298,4 +298,13 @@ class Inference(pl.LightningModule):
             # 拼接 0
             tmp4 = torch.cat((tmp3, cat_zero), dim=1)
             # 拼接 0
-            tmp5 = 
+            tmp5 = torch.cat((tmp4, cat_zero), dim=1)
+            tmp5[rel_pos_mask.bool()] = 1
+            tmp5[rel_pos_mask_plus.bool()] = 1
+            attention_mask_ner_tmp = tmp5
+
+            inputs_ner = {
+                'input_ids': input_ids_ner,
+                'token_type_ids': token_type_ids_ner,
+                'attention_mask': attention_mask_ner_tmp,
+         
