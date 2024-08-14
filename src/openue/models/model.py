@@ -329,4 +329,11 @@ class Inference(pl.LightningModule):
             output = []
             input_ids = []
             for idx, result in enumerate(results):
-                tmp1 = r
+                tmp1 = result[0: attention_position_list[idx]-1]
+                tmp2 = input_ids_list[idx][0: attention_position_list[idx]-1]
+                output.append(tmp1)
+                input_ids.append(tmp2)
+            
+            input_split = torch.sum(mask_relation_output_sigmoid, dim=1)
+            for i in range(1, batch_size):
+                input_split[i] += input_spl
