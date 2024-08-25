@@ -336,4 +336,11 @@ class Inference(pl.LightningModule):
             
             input_split = torch.sum(mask_relation_output_sigmoid, dim=1)
             for i in range(1, batch_size):
-                input_split[i] += input_spl
+                input_split[i] += input_split[i-1]
+            tmp_input_ids = [input_ids[:input_split[0]]]
+            tmp_output = [output[:input_split[0]]]
+            for i in range(1, batch_size):
+                tmp_input_ids.append(input_ids[input_split[i-1]:input_split[i]])
+                tmp_output.append(output[input_split[i-1]:input_split[i]])
+            output = tmp_output
+   
