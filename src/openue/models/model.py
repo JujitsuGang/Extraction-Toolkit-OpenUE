@@ -343,4 +343,14 @@ class Inference(pl.LightningModule):
                 tmp_input_ids.append(input_ids[input_split[i-1]:input_split[i]])
                 tmp_output.append(output[input_split[i-1]:input_split[i]])
             output = tmp_output
-   
+            input_ids = tmp_input_ids
+
+            # 将ner的句子转化为BIOES的标签之后把实体拿出来
+            # processed_results_list_BIO = []
+            # for result in processed_results_list:
+            #     processed_results_list_BIO.append([self.label_map_ner[token] for token in result])
+
+
+            # 把结果剥离出来
+            index = 0
+            triple_output = [[] for _ in range(batch_size
