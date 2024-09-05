@@ -353,4 +353,12 @@ class Inference(pl.LightningModule):
 
             # 把结果剥离出来
             index = 0
-            triple_output = [[] for _ in range(batch_size
+            triple_output = [[] for _ in range(batch_size)]
+
+            # for each relation type or event type
+            # by default, extract the first head and tail to construct the triples
+            if self.mode == "triple":
+                cnt = 0
+                for ids_list, BIOS_list in zip(input_ids, output):
+                    for ids, BIOS in zip(ids_list, BIOS_list):
+                        labels = self.process(ids, BIO
