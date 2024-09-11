@@ -361,4 +361,12 @@ class Inference(pl.LightningModule):
                 cnt = 0
                 for ids_list, BIOS_list in zip(input_ids, output):
                     for ids, BIOS in zip(ids_list, BIOS_list):
-                        labels = self.process(ids, BIO
+                        labels = self.process(ids, BIOS)
+                        # r = label_map_seq[predict_relation_list[index]]
+                        r = predict_relation_list[index] - self.start_idx
+
+                        if len(labels['subject']) == 0:
+                            h = None
+                        else:
+                            h = labels['subject']
+                            # h = ''.join(tokenizer.convert_ids_to_to
