@@ -369,4 +369,15 @@ class Inference(pl.LightningModule):
                             h = None
                         else:
                             h = labels['subject']
-                            # h = ''.join(tokenizer.convert_ids_to_to
+                            # h = ''.join(tokenizer.convert_ids_to_tokens(h))
+
+                        if len(labels['object']) == 0:
+                            t = None
+                        else:
+                            t = labels['object']
+                            # t = ''.join(tokenizer.convert_ids_to_tokens(t))
+
+                        # greedy select the head and tail
+                        if h and t:
+                            for hh in h:
+        
