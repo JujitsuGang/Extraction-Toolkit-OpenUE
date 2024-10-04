@@ -380,4 +380,12 @@ class Inference(pl.LightningModule):
                         # greedy select the head and tail
                         if h and t:
                             for hh in h:
-        
+                                for tt in t:
+                                    triple_output[cnt].append([hh, r, tt])
+
+                        index = index + 1
+                    cnt += 1
+            # 先不考虑
+            # elif self.mode == "event":
+            #     for ids, BIOS in zip(processed_input_ids_list, processed_results_list_BIO):
+            #         tripl
