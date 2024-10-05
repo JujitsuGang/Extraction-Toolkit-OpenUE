@@ -388,4 +388,17 @@ class Inference(pl.LightningModule):
             # 先不考虑
             # elif self.mode == "event":
             #     for ids, BIOS in zip(processed_input_ids_list, processed_results_list_BIO):
-            #         tripl
+            #         triple_output.append(dict(event_type=predict_relation_list[index], argument=self.process(ids, BIOS)))
+
+            return triple_output
+        
+    @staticmethod 
+    def normal_process(text, result):
+        index = 0
+        start = None
+        labels = {}
+        labels['subject'] = []
+        labels['object'] = []
+        indicator = ''
+        for w, t in zip(text, result):
+            # ["
