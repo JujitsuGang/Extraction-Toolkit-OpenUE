@@ -401,4 +401,13 @@ class Inference(pl.LightningModule):
         labels['object'] = []
         indicator = ''
         for w, t in zip(text, result):
-            # ["
+            # ["O", "B-SUB", "I-SUB", "B-OBJ", "I-OBJ", "Relation"
+            if start is None:
+                if t == 'B-SUB':
+                    start = index
+                    indicator = 'subject'
+                elif t == 'B-OBJ':
+                    start = index
+                    indicator = 'object'
+            else:
+                # if t == 'I
