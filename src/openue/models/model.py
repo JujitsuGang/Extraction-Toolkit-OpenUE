@@ -410,4 +410,16 @@ class Inference(pl.LightningModule):
                     start = index
                     indicator = 'object'
             else:
-                # if t == 'I
+                # if t == 'I-SUB' or t == 'I-OBJ':
+                #     continue
+                if t == "O":
+                    # print(result[start: index])
+                    labels[indicator].append(text[start: index])
+                    start = None
+            index += 1
+        # print(labels)
+        return labels
+    
+    
+    @staticmethod 
+    def event_process(text, result):
