@@ -435,4 +435,12 @@ class Inference(pl.LightningModule):
             if start is None:
                 if "B-" in t:
                     # get the label name
- 
+                    indicator = t.split("-")[-1]
+                    start = index
+            else:
+                if t.split("-")[-1] != indicator or "B-" in t:
+                    # B-a I-b wrong, B-a B-a wrong
+                    start = None
+                elif t == "O":
+                    # print(result[start: index])
+                    labels.append(dict(text=text[start: index], label=in
