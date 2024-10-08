@@ -423,3 +423,16 @@ class Inference(pl.LightningModule):
     
     @staticmethod 
     def event_process(text, result):
+        """
+        return List[Dict(text, label)]
+        """
+        index = 0
+        start = None
+        labels = []
+        indicator = ''
+        for w, t in zip(text, result):
+            # ["O", "B-SUB", "I-SUB", "B-OBJ", "I-OBJ", "Relation"
+            if start is None:
+                if "B-" in t:
+                    # get the label name
+ 
